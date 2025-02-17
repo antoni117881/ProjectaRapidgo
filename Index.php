@@ -1,4 +1,3 @@
-
 <?php
 // index.php
 session_start();
@@ -26,11 +25,9 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
         case 'Usuario':
             include __DIR__.'./Resource_usuario.php';
             break;
-    case 'Menu':
-         include __DIR__.'../RegistroMenu.php';
-          break;   
-    default:
-        include __DIR__.'../RegistroMenu.php';
-        break;
+     
+            default:
+            include __DIR__.'/RegistroMenu.php'; // Corrige la ruta
+            break;
     }
 ?>
