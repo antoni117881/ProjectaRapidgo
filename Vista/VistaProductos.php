@@ -9,12 +9,24 @@
                     foreach ($productos as $producto) {
                         ?>
                         <div class="producto-card">
+                          
                             <div class="producto-content">
-                                <h2><?php echo $producto['Nombre']; ?></h2>
-                                <p class="imagen-producto"><img src="<?php echo $producto['Imagen']; ?>" alt="<?php echo $producto['Nombre']; ?>" /></p>
-                                <p class="descripcion"><?php echo $producto['Descripcion']; ?></p>
-                                <p class="precio">Precio: $<?php echo number_format($producto['PrecioUnidad'], 2); ?></p>
-                                <p class="id_producto">Id Producto: <?php echo $producto['ID']; ?></p>
+                              
+                                <div class="Productos" style="width: 18rem;">
+                                <h2 class="nombre-producto"><?php echo $producto['Nombre']; ?></h2>
+                                    <img class="imagen-producto" ><img src="<?php echo $producto['Imagen']; ?>" alt="<?php echo $producto['Nombre']; ?>" width=' 289px'/>
+                                    <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="descripcion"><?php echo $producto['Descripcion']; ?></p>
+                                    <p class="precio">Precio: $<?php echo number_format($producto['PrecioUnidad'], 2); ?></p>
+                                    <p class="id_producto">Id Producto: <?php echo $producto['ID']; ?></p>
+                                    <a href="#" class="btn btn-primary">ver detalles</a>
+                                </div>
+                                </div>
+                                
+                                
+                                
+                               
                             </div>
                          </div>
                         <?php

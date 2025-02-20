@@ -1,0 +1,14 @@
+.card-body{
+    background-color: rgb(0, 0, 0);
+    color: aliceblue;
+    width: 289px; 
+}
+.producto-content{
+   display: flex;
+   justify-content: center;
+    align-items: center;
+}
+.imagen-producto img{
+    
+   
+}

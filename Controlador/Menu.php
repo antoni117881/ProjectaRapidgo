@@ -6,9 +6,4 @@ $conection = DB::getInstance();
 $productoModelo = new ProductoModelo($conection);
 $productos = $productoModelo->ProductosInicio();
 
-$rutaMenu = __DIR__ . '/../RegistroMenu.php';
-if (file_exists($rutaMenu)) {
-    include $rutaMenu;
-} else {
-    die('Error: No se encuentra el archivo resource_Menu.php');
-}
+// No incluyas RegistroMenu.php aquí
