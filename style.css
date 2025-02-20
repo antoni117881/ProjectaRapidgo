@@ -40,3 +40,7 @@
 .producto-card:hover {
     transform: translateY(-5px); /* Mueve la tarjeta hacia arriba al pasar el cursor */
 }
+.nav-item a{
+font-size: 25px;
+
+}

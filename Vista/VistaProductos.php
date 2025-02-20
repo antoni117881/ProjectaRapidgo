@@ -16,7 +16,7 @@
                             <div class="producto-content">
                               
                                 <div class="Productos" style="width: 18rem;">
-                                <h2 class="nombre-producto"><?php echo $producto['Nombre']; ?></h2>
+                                <h5 class="nombre-producto"><?php echo $producto['Nombre']; ?></h5>
                                     <img class="imagen-producto" ><img src="<?php echo $producto['Imagen']; ?>" alt="<?php echo $producto['Nombre']; ?>" width=' 300px' height ='300px'/>
                                     <div class="card-body">
                                     <p class="descripcion"><?php echo $producto['Descripcion']; ?></p>

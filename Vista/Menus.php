@@ -1,4 +1,7 @@
 <html>
+<header>
+        <?php include 'Vista/Vistaheader.php'; ?>
+    </header>
     <h1>
         Estas en la pagina de menus
     </h1>
