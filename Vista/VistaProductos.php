@@ -5,7 +5,10 @@
                 $productoModelo = new ProductoModelo($conection);
                 $productos = $productoModelo->ProductosInicio(); // Llama al método
 
-                if ($productos) {   
+                if ($productos) {  
+                    ?>
+                    <div class="productos"> 
+                         <?php 
                     foreach ($productos as $producto) {
                         ?>
                         <div class="producto-card">
@@ -14,7 +17,7 @@
                               
                                 <div class="Productos" style="width: 18rem;">
                                 <h2 class="nombre-producto"><?php echo $producto['Nombre']; ?></h2>
-                                    <img class="imagen-producto" ><img src="<?php echo $producto['Imagen']; ?>" alt="<?php echo $producto['Nombre']; ?>" width=' 289px'/>
+                                    <img class="imagen-producto" ><img src="<?php echo $producto['Imagen']; ?>" alt="<?php echo $producto['Nombre']; ?>" width=' 300px' height ='300px'/>
                                     <div class="card-body">
                                     <h5 class="card-title">Card title</h5>
                                     <p class="descripcion"><?php echo $producto['Descripcion']; ?></p>
@@ -32,4 +35,7 @@
                         <?php
                     }
                 }
-                ?>
+                    ?>
+                    </div>
+                    <?php>
+         

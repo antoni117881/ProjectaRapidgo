@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
+    <header class='navegacion'>
         <h1>Bienvenido a rapid go </h1>
         <nav>
             <ul>

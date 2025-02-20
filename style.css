@@ -1,14 +1,46 @@
-.card-body{
-    background-color: rgb(0, 0, 0);
-    color: aliceblue;
-    width: 289px; 
+.producto-card {
+    width: 300px; /* Ajusta el ancho según sea necesario */
+    margin: 10px; /* Espacio entre las tarjetas */
+    overflow: hidden; /* Oculta cualquier contenido que se desborde */
+    position: relative; /* Para posicionar la imagen */
 }
-.producto-content{
-   display: flex;
-   justify-content: center;
-    align-items: center;
+
+/* Estilo para la imagen */
+.imagen-producto img {
+    width: 100px; /* Hace que la imagen ocupe el 100% del ancho de la tarjeta */
+    height: 100px; /* Ajusta la altura según sea necesario */
+    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
 }
-.imagen-producto img{
+
+.productos {
+    display: flex; /* Activa Flexbox */
+    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en la siguiente línea si no hay suficiente espacio */
+    justify-content: flex-start; /* Alinea las tarjetas al inicio */
+    margin: 0; /* Elimina márgenes si es necesario */
+    padding: 0; /* Elimina padding si es necesario */
+}
+/* styles.css */
+
+/* Estilo para el menú de navegación */
+.navegacion{
+    background-color: #000;
+    color: #ffffff;
+}
+.navegacion nav ul {
+    list-style-type: none; /* Elimina los puntos de la lista */
+    padding: 0; /* Elimina el padding */
+    margin: 0; /* Elimina el margen */
+    display: flex; /* Activa Flexbox para alinear horizontalmente */
+    background-color: #000;
     
+}
+
+.navegacion nav ul li {
+    margin-right: 20px; /* Espacio entre los elementos del menú */
    
+}
+
+.navegacion nav ul li a {
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    color: #ffffff; /* Cambia el color del texto según sea necesario */
 }
