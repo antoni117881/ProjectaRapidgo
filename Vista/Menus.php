@@ -1,5 +1,7 @@
 <html>
 <header>
+<link rel="stylesheet" href="style.css">
+
         <?php include 'Vista/Vistaheader.php'; ?>
     </header>
     <h1>

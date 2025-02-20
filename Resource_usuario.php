@@ -1,4 +1,9 @@
 <html>
+<header>
+<link rel="stylesheet" href="style.css">
+
+        <?php include 'Vista/Vistaheader.php'; ?>
+    </header>
     <h1>
         Estas en el ususario
     </h1>
