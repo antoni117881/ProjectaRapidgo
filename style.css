@@ -3,6 +3,7 @@
     margin: 10px; /* Espacio entre las tarjetas */
     overflow: hidden; /* Oculta cualquier contenido que se desborde */
     position: relative; /* Para posicionar la imagen */
+    transition: transform 0.3s; /* Añade una transición suave */
 }
 
 /* Estilo para la imagen */
@@ -22,25 +23,20 @@
 /* styles.css */
 
 /* Estilo para el menú de navegación */
-.navegacion{
-    background-color: #000;
-    color: #ffffff;
-}
-.navegacion nav ul {
-    list-style-type: none; /* Elimina los puntos de la lista */
-    padding: 0; /* Elimina el padding */
-    margin: 0; /* Elimina el margen */
-    display: flex; /* Activa Flexbox para alinear horizontalmente */
-    background-color: #000;
-    
+.navbar-nav .nav-item {
+    transition: transform 0.3s; /* Añade una transición suave */
 }
 
-.navegacion nav ul li {
-    margin-right: 20px; /* Espacio entre los elementos del menú */
-   
+.navbar-nav .nav-item:hover {
+    transform: translateY(-5px); /* Mueve el elemento hacia arriba al pasar el cursor */
 }
 
-.navegacion nav ul li a {
+.nav-link {
     text-decoration: none; /* Elimina el subrayado de los enlaces */
-    color: #ffffff; /* Cambia el color del texto según sea necesario */
+    color: #000; /* Cambia el color del texto según sea necesario */
+}
+
+/* Efecto hover para las tarjetas de productos */
+.producto-card:hover {
+    transform: translateY(-5px); /* Mueve la tarjeta hacia arriba al pasar el cursor */
 }
