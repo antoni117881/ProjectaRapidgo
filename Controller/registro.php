@@ -1,94 +1,100 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
 require_once "../Model/Conection_BD.php";
 require_once "Check_email.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $database = new Database();
-    $db = $database->getConnection();
-    $emailChecker = new Check_email();
-    
-    // Obtener y limpiar datos del formulario
-    $nombre = filter_var($_POST['nombre'], FILTER_SANITIZE_STRING);
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-    $password = $_POST['password'];
-    $confirmar_password = $_POST['confirmar_password'];
-    
-    // Validaciones
-    $errores = [];
-    
-    // Validar nombre
-    if (strlen($nombre) < 3) {
-        $errores[] = "El nombre debe tener al menos 3 caracteres";
-    }
-    
-    // Validar email
-    if (!$emailChecker->validateEmail($email)) {
-        $errores[] = "Email inválido";
-    }
-    
-    // Verificar si el email ya existe
     try {
-        $query = "SELECT COUNT(*) FROM usuarios WHERE email = :email";
-        $stmt = $db->prepare($query);
+        $database = new Database();
+        $db = $database->getConnection();
+        
+        if ($db === null) {
+            throw new Exception("Error de conexión a la base de datos. Por favor, inténtelo más tarde.");
+        }
+
+        $emailChecker = new Check_email();
+        
+        // Obtener y limpiar datos del formulario
+        $nombreUsuario = filter_var($_POST['nombre'], FILTER_SANITIZE_STRING);
+        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+        $password = $_POST['password'];
+        $direccion = filter_var($_POST['direccion'], FILTER_SANITIZE_STRING) ?? null;
+        $telefono = filter_var($_POST['telefono'], FILTER_SANITIZE_STRING) ?? null;
+        $rol = 'usuario'; // Valor por defecto
+        
+        // Validaciones
+        $errores = [];
+        
+        // Validar nombre (máximo 100 caracteres según la BD)
+        if (empty($nombreUsuario) || strlen($nombreUsuario) > 100) {
+            $errores[] = "El nombre debe tener entre 1 y 100 caracteres";
+        }
+        
+        // Validar email (máximo 100 caracteres según la BD)
+        if (!$emailChecker->validateEmail($email) || strlen($email) > 100) {
+            $errores[] = "Email inválido o demasiado largo";
+        }
+        
+        // Validar contraseña (máximo 255 caracteres según la BD)
+        if (strlen($password) < 8 || strlen($password) > 255) {
+            $errores[] = "La contraseña debe tener entre 8 y 255 caracteres";
+        }
+        
+        // Validar dirección si se proporciona (máximo 255 caracteres)
+        if (!empty($direccion) && strlen($direccion) > 255) {
+            $errores[] = "La dirección no puede exceder los 255 caracteres";
+        }
+        
+        // Validar teléfono si se proporciona (máximo 20 caracteres)
+        if (!empty($telefono)) {
+            if (!preg_match("/^[0-9]{9}$/", $telefono) || strlen($telefono) > 20) {
+                $errores[] = "El teléfono debe tener 9 dígitos";
+            }
+        }
+        
+        // Verificar si el email ya existe
+        $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE Email = :email");
         $stmt->bindParam(":email", $email);
         $stmt->execute();
         
         if ($stmt->fetchColumn() > 0) {
             $errores[] = "Este email ya está registrado";
         }
-    } catch(PDOException $e) {
-        $errores[] = "Error al verificar el email";
-    }
-    
-    // Validar contraseña
-    if (strlen($password) < 6) {
-        $errores[] = "La contraseña debe tener al menos 6 caracteres";
-    }
-    
-    // Validar confirmación de contraseña
-    if ($password !== $confirmar_password) {
-        $errores[] = "Las contraseñas no coinciden";
-    }
-    
-    // Si hay errores, redirigir de vuelta al formulario
-    if (!empty($errores)) {
-        $error_string = implode(", ", $errores);
-        header("Location: ../Resource_registro.php?error=" . urlencode($error_string));
-        exit();
-    }
-    
-    // Si no hay errores, proceder con el registro
-    try {
+        
+        // Si hay errores, redirigir
+        if (!empty($errores)) {
+            throw new Exception(implode(", ", $errores));
+        }
+        
         // Hash de la contraseña
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
         
         // Insertar nuevo usuario
-        $query = "INSERT INTO usuarios (nombre, email, password, estado) VALUES (:nombre, :email, :password, 'activo')";
-        $stmt = $db->prepare($query);
+        $query = "INSERT INTO usuarios (NombreUsuario, Email, Contrasena, Direccion, Telefono, Rol) 
+                 VALUES (:nombre, :email, :password, :direccion, :telefono, :rol)";
         
-        $stmt->bindParam(":nombre", $nombre);
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":nombre", $nombreUsuario);
         $stmt->bindParam(":email", $email);
         $stmt->bindParam(":password", $password_hash);
+        $stmt->bindParam(":direccion", $direccion);
+        $stmt->bindParam(":telefono", $telefono);
+        $stmt->bindParam(":rol", $rol);
         
         if ($stmt->execute()) {
-            // Registro exitoso
             $_SESSION['registro_exitoso'] = true;
             header("Location: ../Resource_login.php?success=Registro exitoso. Por favor, inicia sesión.");
             exit();
         } else {
-            header("Location: ../Resource_registro.php?error=Error al crear la cuenta");
-            exit();
+            throw new Exception("Error al crear la cuenta");
         }
         
-    } catch(PDOException $e) {
-        error_log("Error de registro: " . $e->getMessage());
-        header("Location: ../Resource_registro.php?error=Error del sistema");
+    } catch(Exception $e) {
+        error_log("Error en registro: " . $e->getMessage());
+        header("Location: ../Resource_registro.php?error=" . urlencode($e->getMessage()));
         exit();
     }
 }
-
-// Si alguien intenta acceder directamente a este archivo sin POST
-header("Location: ../Resource_registro.php");
-exit();
-?> 

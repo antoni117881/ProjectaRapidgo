@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once "../Model/Conection_BD.php";
-require_once "Check_email.php";
+require_once __DIR__ . "/../Model/Conection_BD.php";
+require_once __DIR__ . "/Check_email.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $database = new Database();

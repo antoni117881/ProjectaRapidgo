@@ -1,27 +1,24 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $db_name = "nombre_de_tu_base_de_datos";
-    private $username = "tu_usuario";
-    private $password = "tu_contraseña";
+    private $db_name = "rapidgobd";
+    private $username = "root";
+    private $password = "";
     public $conn;
 
     public function getConnection() {
-        $this->conn = null;
-
         try {
             $this->conn = new PDO(
                 "mysql:host=" . $this->host . ";dbname=" . $this->db_name,
                 $this->username,
-                $this->password
+                $this->password,
+                array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
             );
-            $this->conn->exec("set names utf8");
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $this->conn;
         } catch(PDOException $e) {
-            error_log("Error de conexión: " . $e->getMessage());
+            echo "Error de conexión: " . $e->getMessage();
+            return null;
         }
-
-        return $this->conn;
     }
 }
 ?>
