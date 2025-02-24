@@ -3,9 +3,18 @@ session_start();
 require_once __DIR__ . "/../Model/Conection_BD.php";
 require_once __DIR__ . "/Check_email.php";
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $database = new Database();
-    $db = $database->getConnection();
+    try {
+        $database = new Database();
+        $db = $database->getConnection();
+    } catch(PDOException $e) {
+        error_log("Error de conexión: " . $e->getMessage());
+        header("Location: ../Resource_login.php?error=Error de conexión a la base de datos");
+        exit();
+    }
     $emailChecker = new Check_email();
     
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
@@ -18,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     try {
-        $query = "SELECT id, email, password, nombre, estado FROM usuarios WHERE email = :email";
+        $query = "SELECT id, email, contraseña, nombre, estado FROM usuarios WHERE email = :email";
         $stmt = $db->prepare($query);
         $stmt->bindParam(":email", $email);
         $stmt->execute();
@@ -32,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit();
             }
             
-            if (password_verify($password, $row['password'])) {
+            if (password_verify($password, $row['contraseña'])) {
                 // Login exitoso
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['user_email'] = $row['email'];
@@ -51,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $updateStmt->bindParam(":id", $row['id']);
                 $updateStmt->execute();
                 
-                header("Location: ../dashboard.php");
+                header("Location: ../menu.php");
                 exit();
             } else {
                 header("Location: ../Resource_login.php?error=Contraseña incorrecta");
@@ -63,7 +72,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } catch(PDOException $e) {
         error_log("Error de login: " . $e->getMessage());
-        header("Location: ../Resource_login.php?error=Error del sistema");
+        error_log("SQL State: " . $e->getCode());
+        error_log("Trace: " . $e->getTraceAsString());
+        header("Location: ../Resource_login.php?error=Error del sistema: " . $e->getMessage());
         exit();
     }
 }

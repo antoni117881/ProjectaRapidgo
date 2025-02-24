@@ -76,17 +76,19 @@
         <div class="social-login">
             <p>O inicia sesión con:</p>
             <div class="social-buttons">
-                <a href="#" class="btn-social btn-google">
+                <a href="Controller/google_login.php" class="btn-social btn-google">
                     <i class="fab fa-google"></i>
+                    Iniciar sesión con Google
                 </a>
-                <a href="#" class="btn-social btn-facebook">
+                <a href="Controller/facebook_login.php" class="btn-social btn-facebook">
                     <i class="fab fa-facebook-f"></i>
+                    Iniciar sesión con Facebook
                 </a>
             </div>
         </div>
         
         <div class="links">
-            <a href="register.php">
+            <a href="Resource_registro.php">
                 <i class="fas fa-user-plus"></i>
                 ¿No tienes cuenta? Regístrate
             </a>
