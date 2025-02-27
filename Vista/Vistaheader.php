@@ -10,16 +10,7 @@
       
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-            <a class="navbar-brand" href="#">RAPIDGO</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="?action=Login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="?action=registro">Registro</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="?action=Usuario">Mi cuenta</a>
+            <a class="navbar-brand" href="?action=">RAPIDGO</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="?action=Restaurantes">Restaurantes</a>
@@ -30,7 +21,22 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="?action=Ofertas">Ofertas</a>
         </li>
+       
       </ul>
+      <div class="usu">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item nav-Us">
+          <a class="nav-link active" aria-current="page" href="?action=Login">Login</a>
+        </li>
+        <li class="nav-item nav-Us">
+          <a class="nav-link active" aria-current="page" href="?action=registro">Registro</a>
+        </li>
+        <li class="nav-item nav-Us">
+          <a class="nav-link active" aria-current="page" href="?action=Usuario">Mi cuenta</a>
+        </li> 
+</ul>
+        </div>
+
     </div>
   </div>
 </nav>

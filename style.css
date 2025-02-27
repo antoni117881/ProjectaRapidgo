@@ -23,8 +23,10 @@
 /* styles.css */
 
 /* Estilo para el menú de navegación */
-.navbar-nav .nav-item {
-    transition: transform 0.3s; /* Añade una transición suave */
+.navbar-nav .nav-item .usuarios {
+    transition: transform 0.3s;
+     /* Añade una transición suave */
+
 }
 
 .navbar-nav .nav-item:hover {
@@ -44,3 +46,33 @@
 font-size: 25px;
 
 }
+.usuarios a {
+    display: inline; 
+   justify-content: flex-end;
+
+}
+
+/* Vista/Vistaheader.css */
+.navbar-nav {
+    display: flex; /* Activa Flexbox en la barra de navegación */
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+    
+}
+
+.nav-Us {
+    margin-left: auto; /* Empuja los elementos con la clase nav-Us hacia la derecha */
+    display: flex; /* Asegura que los elementos dentro se alineen en fila */
+}
+
+.nav-item {
+    margin-left: 15px; /* Espacio entre los elementos nav-item */
+}
+
+.usu {
+    margin-left: auto; /* Empuja los elementos de la clase usuarios hacia la derecha */
+    display: flex; /* Asegura que los elementos dentro se alineen en fila */
+}
+
+
+
+
