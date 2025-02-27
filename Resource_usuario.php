@@ -8,6 +8,9 @@
 <body>
     <div class="container">
         <header>
+        
+<?php include 'Vista/Vistaheader.php'; ?>
+
             <h1>Mi Perfil de Usuario</h1>
         </header>
 

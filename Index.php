@@ -10,7 +10,7 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
         include __DIR__.'/Resource_login.php';
         break;
     case 'registro':
-        include __DIR__.'/Resource_register.php';
+        include __DIR__.'/Resource_registro.php';
          break;
              
     case 'Restaurantes':

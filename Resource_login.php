@@ -23,6 +23,9 @@
         }
     </style>
 </head>
+<header>
+<?php include 'Vista/Vistaheader.php'; ?>
+</header>
 <body>
     <div class="login-container">
         <div class="logo-container">
