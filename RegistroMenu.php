@@ -2,27 +2,22 @@
 <head>
     <title>Página Principal</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles.css"> <!-- Enlace a una hoja de estilos -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Bienvenido a Mi Página Principal</h1>
-        <nav>
-            <ul>
-                <li><a href="?action=Login">Login</a></li>
-                <li><a href="?action=registro">Registre</a></li>
-                <li><a href="?action=Usuario">Mi Cuenta</a></li>
-                <li><a href="?action=Restaurantes">Restaurantes</a></li>
-                <li><a href="?action=Menus">Menús</a></li>
-                <li><a href="?action=Ofertas">Ofertas Especiales</a></li>
-            </ul>
-        </nav>
+        <?php include 'Vista/Vistaheader.php'; ?>
     </header>
     <main>
-        <p>Este es un contenido de ejemplo para la página principal.</p>
+        <div class="productos">
+            <?php
+            require_once 'Controlador/Menu.php'; // Asegúrate de que esto esté correcto
+            
+
+            // Incluir el archivo que muestra los productos
+            require_once 'Vista/VistaProductos.php';
+            ?>
+        </div>
     </main>
-    <footer>
-        <p>&copy; 2023 Mi Sitio Web</p>
-    </footer>
 </body>
 </html>

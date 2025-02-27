@@ -1,0 +1,78 @@
+.producto-card {
+    width: 300px; /* Ajusta el ancho según sea necesario */
+    margin: 10px; /* Espacio entre las tarjetas */
+    overflow: hidden; /* Oculta cualquier contenido que se desborde */
+    position: relative; /* Para posicionar la imagen */
+    transition: transform 0.3s; /* Añade una transición suave */
+}
+
+/* Estilo para la imagen */
+.imagen-producto img {
+    width: 100px; /* Hace que la imagen ocupe el 100% del ancho de la tarjeta */
+    height: 100px; /* Ajusta la altura según sea necesario */
+    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+}
+
+.productos {
+    display: flex; /* Activa Flexbox */
+    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en la siguiente línea si no hay suficiente espacio */
+    justify-content: flex-start; /* Alinea las tarjetas al inicio */
+    margin: 0; /* Elimina márgenes si es necesario */
+    padding: 0; /* Elimina padding si es necesario */
+}
+/* styles.css */
+
+/* Estilo para el menú de navegación */
+.navbar-nav .nav-item .usuarios {
+    transition: transform 0.3s;
+     /* Añade una transición suave */
+
+}
+
+.navbar-nav .nav-item:hover {
+    transform: translateY(-5px); /* Mueve el elemento hacia arriba al pasar el cursor */
+}
+
+.nav-link {
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    color: #000; /* Cambia el color del texto según sea necesario */
+}
+
+/* Efecto hover para las tarjetas de productos */
+.producto-card:hover {
+    transform: translateY(-5px); /* Mueve la tarjeta hacia arriba al pasar el cursor */
+}
+.nav-item a{
+font-size: 25px;
+
+}
+.usuarios a {
+    display: inline; 
+   justify-content: flex-end;
+
+}
+
+/* Vista/Vistaheader.css */
+.navbar-nav {
+    display: flex; /* Activa Flexbox en la barra de navegación */
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
+    
+}
+
+.nav-Us {
+    margin-left: auto; /* Empuja los elementos con la clase nav-Us hacia la derecha */
+    display: flex; /* Asegura que los elementos dentro se alineen en fila */
+}
+
+.nav-item {
+    margin-left: 15px; /* Espacio entre los elementos nav-item */
+}
+
+.usu {
+    margin-left: auto; /* Empuja los elementos de la clase usuarios hacia la derecha */
+    display: flex; /* Asegura que los elementos dentro se alineen en fila */
+}
+
+
+
+
