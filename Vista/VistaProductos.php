@@ -17,7 +17,11 @@ require_once'Controlador/productos_controller.php';
                                     <h5 class="nombre-producto"><?php echo $producto['Nombre']; ?></h5>
                                     <p class="descripcion"><?php echo $producto['Descripcion']; ?></p>
                                     <p class="precio">Precio: $<?php echo number_format($producto['PrecioUnidad'], 2); ?></p>
-                                    <a href="?action=registroProduct?id=<?php echo $producto['ID']; ?>" class="btn btn-primary">ver detalles</a>
+                                    <p>ID producto: <?php echo $producto['ID']; ?></p>
+                                    <form action="?action=registroProduct" method="POST">
+                                        <input type="hidden" name="idRestaurante" value="<?php echo $producto['ID']; ?>">
+                                        <button type="submit" class="btn btn-primary">Ver detalles del producto </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

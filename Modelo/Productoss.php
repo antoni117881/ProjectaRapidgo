@@ -53,7 +53,14 @@ class ProductoModelo {
             $consulta = $this->db->prepare("SELECT * FROM productos WHERE ID = :idProducto");
             $consulta->bindParam(':idProducto', $idProducto, PDO::PARAM_INT);
             $consulta->execute();
-            return $consulta->fetch(PDO::FETCH_ASSOC);
+            
+            $producto = $consulta->fetch(PDO::FETCH_ASSOC);
+            if (!$producto) {
+                error_log("No se encontró el producto con ID: " . $idProducto);
+            } else {
+                error_log("Producto encontrado: " . print_r($producto, true)); // Para depuración
+            }
+            return $producto;
         } catch (PDOException $e) {
             error_log("Error en obtenerProductoPorId: " . $e->getMessage());
             return false;

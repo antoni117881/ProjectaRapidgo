@@ -13,10 +13,6 @@ $idRestaurante = isset($_POST['idRestaurante']) ? (int)$_POST['idRestaurante'] :
 if ($idRestaurante > 0) {
     $productos = $productoModelo->obtenerProductosPorRestaurante($idRestaurante);
     $cantidadProductos = count($productos); // Contar productos encontrados
-    if (empty($productos)) {
-        echo "No se encontraron productos para este restaurante.<br>";
-    }
-    $restaurante = $restauranteModelo->obtenerRestauranteId($idRestaurante);
 } else {
     die("ID de restaurante no válido.");
 }
@@ -26,12 +22,13 @@ $idProducto = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 if ($idProducto > 0) {
     // Filtrar el producto específico
-    $productos = array_filter($productos, function($producto) use ($idProducto) {
+    $productoSeleccionado = array_filter($productos, function($producto) use ($idProducto) {
         return $producto['ID'] === $idProducto;
     });
+    
+    // Redirigir a la página de registro de producto individual
+    header("Location: RegistroProductoIndividual.php?id=" . $idProducto);
+    exit();
 }
-
-// Incluir la vista de productos
-include '../Vista/VistaProductos.php';
 
 ?>
