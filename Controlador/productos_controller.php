@@ -21,6 +21,17 @@ if ($idRestaurante > 0) {
     die("ID de restaurante no válido.");
 }
 
+// Verificar si se ha enviado un ID de producto
+$idProducto = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
+if ($idProducto > 0) {
+    // Filtrar el producto específico
+    $productos = array_filter($productos, function($producto) use ($idProducto) {
+        return $producto['ID'] === $idProducto;
+    });
+}
+
+// Incluir la vista de productos
+include '../Vista/VistaProductos.php';
 
 ?>
