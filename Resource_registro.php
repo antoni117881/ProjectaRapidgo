@@ -87,6 +87,9 @@
         }
     </style>
 </head>
+<header>
+<?php include 'Vista/Vistaheader.php'; ?>
+</header>
 <body>
     <div class="form-container">
         <h2 style="text-align: center; color: #333; margin-bottom: 30px;">Registro de Usuario</h2>

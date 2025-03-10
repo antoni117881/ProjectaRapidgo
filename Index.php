@@ -10,22 +10,29 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
         include __DIR__.'/Resource_login.php';
         break;
     case 'registro':
-        include __DIR__.'/Resource_register.php';
+        include __DIR__.'/Resource_registro.php';
          break;
              
     case 'Restaurantes':
         include __DIR__.'./Vista/restaurantes.php';
           break;
-          case 'Ofertas':
-            include __DIR__.'./Vista/Ofertas.php';
-              break;
+    case 'Ofertas':
+        include __DIR__.'./Vista/Ofertas.php';
+        break;
     case 'Menus':
         include __DIR__.'./Vista/Menus.php';
         break;
-        case 'Usuario':
-            include __DIR__.'./Resource_usuario.php';
+    case 'Usuario':
+        include __DIR__.'./Resource_usuario.php';
+         break;
+    case 'RestauranteMenu':
+            include __DIR__.'./RegistroRestaurante.php';
             break;
-     
+    case 'registroProduct':
+        include __DIR__.'./RegistroProductoIndividual.php';
+        break;
+    
+                
             default:
             include __DIR__.'/RegistroMenu.php';
             break;
