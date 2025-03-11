@@ -18,7 +18,7 @@ if ($idRestaurante > 0) {
 }
 
 // Verificar si se ha enviado un ID de producto
-$idProducto = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$idProducto = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 
 if ($idProducto > 0) {
     // Filtrar el producto específico

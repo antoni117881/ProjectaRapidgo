@@ -1,5 +1,6 @@
 <?php   
-require_once'Controlador/productos_controller.php';
+require_once 'Controlador/productos_controller.php';
+
 ?>
 
 
@@ -18,9 +19,10 @@ require_once'Controlador/productos_controller.php';
                                     <p class="descripcion"><?php echo $producto['Descripcion']; ?></p>
                                     <p class="precio">Precio: $<?php echo number_format($producto['PrecioUnidad'], 2); ?></p>
                                     <p>ID producto: <?php echo $producto['ID']; ?></p>
+                                    
                                     <form action="?action=registroProduct" method="POST">
-                                        <input type="hidden" name="idRestaurante" value="<?php echo $producto['ID']; ?>">
-                                        <button type="submit" class="btn btn-primary">Ver detalles del producto </button>
+                                        <input type="hidden" name="idProducto" value="<?php echo $producto['ID']; ?>">
+                                        <button type="submit" class="btn btn-primary" >Ver detalles del producto </button>
                                     </form>
                                 </div>
                             </div>

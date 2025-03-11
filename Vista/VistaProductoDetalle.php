@@ -1,3 +1,6 @@
+<?php
+require_once 'Controlador/RegistroProductoIndividual.php';
+?>
 <html>
 <head>
     <title>Detalles del Producto</title>
@@ -6,7 +9,8 @@
 </head>
 <body>
     <header>
-        <?php include 'Vista/Vistaheader.php'; ?>
+        <?php include 'Vista/Vistaheader.php'; 
+        echo $producto['ID']; ?>
     </header>
     <main>
         <h1>Detalles del Producto</h1>

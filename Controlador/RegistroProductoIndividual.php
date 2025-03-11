@@ -14,6 +14,7 @@ if ($idProducto > 0) {
     $producto = $productoModelo->obtenerProductoPorId($idProducto);
     if (!$producto) {
         die("Producto no encontrado. ID buscado: " . $idProducto);
+        echo $producto['ID'];
     }
 } else {
     die("ID de producto no válido.");
