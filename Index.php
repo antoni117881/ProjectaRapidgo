@@ -31,6 +31,9 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
     case 'registroProduct':
         include __DIR__.'./RegistroProductoIndividual.php';
         break;
+    case 'agregarCesta':
+        include __DIR__.'./Registrocesta.php';
+        break;
     
                 
             default:

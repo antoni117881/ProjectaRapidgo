@@ -24,6 +24,11 @@ require_once 'Controlador/productos_controller.php';
                                         <input type="hidden" name="idProducto" value="<?php echo $producto['ID']; ?>">
                                         <button type="submit" class="btn btn-primary" >Ver detalles del producto </button>
                                     </form>
+                                    <form action="?action=agregarCesta" method="POST">
+                                    <input type="hidden" name="idProducto" value="<?php echo $producto['ID']; ?>">
+                                    <input type="number" name="cantidad" value="1" min="1" max="10">
+                                    <button type="submit" class="btn btn-success">Añadir a la cesta</button>
+                                </form>
                                 </div>
                             </div>
                         </div>
