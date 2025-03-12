@@ -1,39 +1,36 @@
 <?php
-// resource_filtro.php
+// index.php
+session_start();
 
-// Verificar si se han enviado categorías
-if (isset($_POST['categorias'])) {
-    $categorias = $_POST['categorias'];
+$action = $_GET['action'] ?? null;
 
-    // Conexión a la base de datos
-    $conexion = new mysqli("localhost", "usuario", "contraseña", "base_de_datos");
-
-    // Verificar la conexión
-    if ($conexion->connect_error) {
-        die("Conexión fallida: " . $conexion->connect_error);
-    }
-
-    // Crear una cadena de consulta con las categorías seleccionadas
-    $ids = implode(',', array_map('intval', $categorias));
-    $consulta = "SELECT * FROM productos WHERE categoria_id IN ($ids)";
-
-    // Ejecutar la consulta
-    $resultado = $conexion->query($consulta);
-
-    // Verificar si hay resultados
-    if ($resultado->num_rows > 0) {
-        // Mostrar los productos filtrados
-        while ($producto = $resultado->fetch_assoc()) {
-            echo 'Producto: ' . $producto['nombre'] . '<br>';
-            echo 'Precio: ' . $producto['precio'] . '<br><br>';
-        }
-    } else {
-        echo "No se encontraron productos para las categorías seleccionadas.";
-    }
-
-    // Cerrar la conexión
-    $conexion->close();
-} else {
-    echo "No se seleccionaron categorías.";
+switch ($action) {
+    case 'Login':
+        include __DIR__.'/Resource_login.php';
+        break;
+    case 'registro':
+        include __DIR__.'/Resource_register.php';
+        break;
+    case 'Restaurantes':
+        include __DIR__.'./Vista/restaurantes.php';
+        break;
+    case 'Ofertas':
+        include __DIR__.'./Vista/Ofertas.php';
+        break;
+    case 'Menus':
+        include __DIR__.'./Vista/Menus.php';
+        break;
+    case 'Usuario':
+        include __DIR__.'./Resource_usuario.php';
+        break;
+    case 'Menu':
+        include __DIR__.'../RegistroMenu.php';
+        break;
+    case 'Filtro':
+        include __DIR__.'/resource_filtro.php';
+        break;
+    default:
+        include __DIR__.'../RegistroMenu.php';
+        break;
 }
 ?>
