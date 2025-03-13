@@ -31,6 +31,9 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
     case 'Filtro':
         include __DIR__.'/resource_filtro.php';
         break;
+    case 'Resenas':
+        include __DIR__.'/Vista/ResenaView.php';
+        break;
     default:
         include __DIR__.'../RegistroMenu.php';
         break;
