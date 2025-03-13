@@ -92,5 +92,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             throw new Exception("Error al crear la cuenta");
         }
         
-   
+    } catch(Exception $e) {
+        echo "Error en registro: " . $e->getMessage();
+        error_log("Error en registro: " . $e->getMessage());
+        header("Location: ../Resource_registro.php?error=" . urlencode($e->getMessage()));
+        exit();
+    }
 }
