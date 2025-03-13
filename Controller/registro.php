@@ -9,7 +9,7 @@ require_once "Check_email.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-        
+    try {
         $conection = DB::getInstance();
         
         

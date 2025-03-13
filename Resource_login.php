@@ -41,7 +41,7 @@
             </div>
         <?php endif; ?>
         
-        <form action="Controller/login.php" method="POST" onsubmit="return validarFormulario()">
+        <form action="?action=" method="POST"   onsubmit="return validarFormulario()">
             <div class="form-group">
                 <label for="email">Correo Electrónico:</label>
                 <div class="input-group">

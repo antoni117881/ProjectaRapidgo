@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . "/../Model/Conection_BD.php";
+require_once __DIR__ . "/../Modelo/BDDConection.php";
 require_once __DIR__ . "/Check_email.php";
 
 error_reporting(E_ALL);
@@ -8,8 +8,7 @@ ini_set('display_errors', 1);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        $database = new Database();
-        $db = $database->getConnection();
+        $db = DB::getInstance();
     } catch(PDOException $e) {
         error_log("Error de conexión: " . $e->getMessage());
         header("Location: ../Resource_login.php?error=Error de conexión a la base de datos");
@@ -17,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $emailChecker = new Check_email();
     
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
     $password = $_POST['password'];
     
     // Validar email
@@ -32,8 +31,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(":email", $email);
         $stmt->execute();
         
+        error_log("Buscando usuario con email: " . $email);
+        error_log("Número de usuarios encontrados: " . $stmt->rowCount());
+
         if ($stmt->rowCount() > 0) {
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            error_log("Usuario encontrado: " . print_r($row, true));
             
             // Verificar si la cuenta está activa
             if ($row['estado'] != 'activo') {
