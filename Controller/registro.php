@@ -3,17 +3,17 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 session_start();
-require_once "../Model/Conection_BD.php";
+
+require_once __DIR__. '/../Modelo/BDDConection.php';
 require_once "Check_email.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    try {
-        $database = new Database();
-        $db = $database->getConnection();
+    
         
-        if ($db === null) {
-            throw new Exception("Error de conexión a la base de datos. Por favor, inténtelo más tarde.");
-        }
+        $conection = DB::getInstance();
+        
+        
+        
 
         $emailChecker = new Check_email();
         
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         
         // Verificar si el email ya existe
-        $stmt = $db->prepare("SELECT COUNT(*) FROM usuarios WHERE Email = :email");
+        $stmt = $conection->prepare("SELECT COUNT(*) FROM usuarios WHERE Email = :email");
         $stmt->bindParam(":email", $email);
         $stmt->execute();
         
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $query = "INSERT INTO usuarios (NombreUsuario, Email, Contrasena, Direccion, Telefono, Rol) 
                  VALUES (:nombre, :email, :password, :direccion, :telefono, :rol)";
         
-        $stmt = $db->prepare($query);
+        $stmt = $conection->prepare($query);
         $stmt->bindParam(":nombre", $nombreUsuario);
         $stmt->bindParam(":email", $email);
         $stmt->bindParam(":password", $password_hash);
@@ -92,9 +92,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             throw new Exception("Error al crear la cuenta");
         }
         
-    } catch(Exception $e) {
-        error_log("Error en registro: " . $e->getMessage());
-        header("Location: ../Resource_registro.php?error=" . urlencode($e->getMessage()));
-        exit();
-    }
+   
 }

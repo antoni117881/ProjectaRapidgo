@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Página Principal</title>
+    <title>Página Productos</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,11 +12,10 @@
     <main>
         <div class="productos">
             <?php
-                //icnluir la vista de los restaurantes 
-                
-                
-             include_once 'Vista/VistaRestaurantes.php'; 
-             
+            
+
+                //icnluir la vista de los productos de el restaurante 
+             include_once 'Vista/VistaProductos.php'; 
             ?>
         </div>
     </main>

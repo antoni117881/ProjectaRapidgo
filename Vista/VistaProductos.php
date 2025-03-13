@@ -1,40 +1,41 @@
-<?php
-                require_once 'Controlador/Menu.php'; // Asegúrate de que esto esté correcto
-                
-                // Crear una instancia de ProductoModelo
-                $productoModelo = new ProductoModelo($conection);
-                $productos = $productoModelo->ProductosInicio(); // Llama al método
+<?php   
+require_once 'Controlador/productos_controller.php';
 
-                if ($productos) {  
-                    ?>
-                    <div class="productos"> 
-                         <?php 
-                    foreach ($productos as $producto) {
-                        ?>
-                        <div class="producto-card">
-                          
-                            <div class="producto-content">
-                              
-                                <div class="Productos" style="width: 18rem;">
-                                    <img class="imagen-producto" ><img src="<?php echo $producto['Imagen']; ?>" alt="<?php echo $producto['Nombre']; ?>" width=' 300px' height ='300px'/>
-                                    <div class="card-body">
+?>
+
+
+    <main>
+        <h1>Productos del Restaurante</h1>
+        <p>Cantidad de productos encontrados: <?php echo $cantidadProductos; ?></p>
+        <div class="productos">
+            <?php if ($productos && count($productos) > 0): ?>
+                <?php foreach ($productos as $producto): ?>
+                    <div class="producto-card">
+                        <div class="producto-content">
+                            <div class="Productos" style="width: 18rem;">
+                                <img class="imagen-producto" src="<?php echo $producto['Imagen']; ?>" alt="<?php echo $producto['Nombre']; ?>" width='300px' height='300px'/>
+                                <div class="card-body">
                                     <h5 class="nombre-producto"><?php echo $producto['Nombre']; ?></h5>
                                     <p class="descripcion"><?php echo $producto['Descripcion']; ?></p>
                                     <p class="precio">Precio: $<?php echo number_format($producto['PrecioUnidad'], 2); ?></p>
-                                    <p class="id_producto">Id Producto: <?php echo $producto['ID']; ?></p>
-                                    <a href="#" class="btn btn-primary">ver detalles</a>
+                                    <p>ID producto: <?php echo $producto['ID']; ?></p>
+                                    
+                                    <form action="?action=registroProduct" method="POST">
+                                        <input type="hidden" name="idProducto" value="<?php echo $producto['ID']; ?>">
+                                        <button type="submit" class="btn btn-primary" >Ver detalles del producto </button>
+                                    </form>
+                                    <form action="?action=agregarCesta" method="POST">
+                                    <input type="hidden" name="idProducto" value="<?php echo $producto['ID']; ?>">
+                                    <input type="number" name="cantidad" value="1" min="1" max="10">
+                                    <button type="submit" class="btn btn-success">Añadir a la cesta</button>
+                                </form>
                                 </div>
-                                </div>
-                                
-                                
-                                
-                               
                             </div>
-                         </div>
-                        <?php
-                    }
-                }
-                    ?>
+                        </div>
                     </div>
-                    <?php>
-         
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No hay productos disponibles para este restaurante.</p>
+            <?php endif; ?>
+        </div>
+    </main>
