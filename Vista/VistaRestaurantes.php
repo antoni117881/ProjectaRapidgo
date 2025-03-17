@@ -23,9 +23,9 @@
                                     <p class="precio">Telefono-><?php echo number_format($restaurante['Telefono'], 2); ?></p>
                                     <p>ID del restaurante: <?php echo $restaurante['ID']; ?></p>
                                     <form action="?action=RestauranteMenu" method="POST">
-    <input type="hidden" name="idRestaurante" value="<?php echo $restaurante['ID']; ?>">
-    <button type="submit" class="btn btn-primary">ver menú del restaurante</button>
-</form>
+                        <input type="hidden" name="idRestaurante" value="<?php echo $restaurante['ID']; ?>">
+                        <button type="submit" class="btn btn-primary">ver menú del restaurante</button>
+                    </form>
                                 </div>
                                 </div>
                                 
