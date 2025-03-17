@@ -20,7 +20,7 @@ require_once 'Controlador/productos_controller.php';
                                     <p class="precio">Precio: $<?php echo number_format($producto['PrecioUnidad'], 2); ?></p>
                                     <p>ID producto: <?php echo $producto['ID']; ?></p>
                                     
-                                    <form action="?action=registroProduct" method="POST">
+                                    <form action="?action=RestauranteMenu" method="POST">
                                         <input type="hidden" name="idProducto" value="<?php echo $producto['ID']; ?>">
                                         <button type="submit" class="btn btn-primary" >Ver detalles del producto </button>
                                     </form>

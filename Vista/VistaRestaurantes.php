@@ -39,5 +39,5 @@
                 }
                     ?>
                     </div>
-                    <?php>
+                    <?php } // Cerrar el bloque de PHP correctamente ?>
          
