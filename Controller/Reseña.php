@@ -43,10 +43,10 @@ class ReseñaController
         $reseña = new Reseña($data);
         if ($reseña->save()) {
             // Redirigir a la lista de reseñas
-            header('Location: Vista/ResenaView.php');
+            header('Location: View/ResenaView.php');
         } else {
             // Manejar errores de validación
-            Vista::render('reseñas/create', ['errors' => $reseña->getErrors()]);
+            View::render('reseñas/create', ['errors' => $reseña->getErrors()]);
         }
     }
 
@@ -87,6 +87,8 @@ class ReseñaController
         $estrellas = intval($estrellas);
         $fecha = date("Y-m-d H:i:s");
 
+        // Evitar inyecciones SQL
+        $descripcion = $this->conn->real_escape_string($descripcion);
         $sql_insert = "INSERT INTO reseñas (descripcion, estrellas, fecha) VALUES ('$descripcion', $estrellas, '$fecha')";
         if ($this->conn->query($sql_insert) === TRUE) {
             return "Reseña añadida con éxito.";

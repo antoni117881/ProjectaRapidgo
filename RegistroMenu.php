@@ -9,6 +9,7 @@
         <?php include 'Vista/Vistaheader.php'; ?>
         <button onclick="location.href='Vista/ResenaView.php'" class="btn-resena">Reseñas</button>
         <button onclick="location.href='Controller/pago.php'" class="btn-pago">Pagar</button>
+        <button onclick="location.href='Vista/CestaView.php'" class="btn-cesta">Cesta</button>
     </header>
     <main>
         <div class="productos">
