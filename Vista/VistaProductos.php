@@ -8,7 +8,8 @@ require_once 'Controlador/productos_controller.php';
         <h1>Productos del Restaurante</h1>
         <p>Cantidad de productos encontrados: <?php echo $cantidadProductos; ?></p>
         <div class="productos">
-            <?php if ($productos && count($productos) > 0): ?>
+            <?php if ($productos && count($productos) > 0):  ?>
+                
                 <?php foreach ($productos as $producto): ?>
                     <div class="producto-card">
                         <div class="producto-content">

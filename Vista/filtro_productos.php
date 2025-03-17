@@ -51,24 +51,19 @@
         <h3>Filtrar por Categorías</h3>
         <form id="filtroForm" action="" method="GET">
             <?php
-            // Obtener categorías de la base de datos
-            require_once "../Model/Conection_BD.php";
-            $database = new Database();
-            $db = $database->getConnection();
-            
-            $query = "SELECT DISTINCT Categoria FROM productos ORDER BY Categoria";
-            $stmt = $db->prepare($query);
-            $stmt->execute();
-            
+            require_once 'Controller/filtro.php';
+            require_once __DIR__. '/../Modelo/BDDConection.php';
+           
+
             // Obtener categorías seleccionadas previamente
             $categoriasSeleccionadas = isset($_GET['categorias']) ? $_GET['categorias'] : [];
             
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $checked = in_array($row['Categoria'], $categoriasSeleccionadas) ? 'checked' : '';
+            foreach ($categorias as $categoria) {
+                $checked = in_array($categoria['id_categoria'], $categoriasSeleccionadas) ? 'checked' : '';
                 echo '<div class="checkbox-group">';
                 echo '<label>';
-                echo '<input type="checkbox" name="categorias[]" value="' . htmlspecialchars($row['Categoria']) . '" ' . $checked . '>';
-                echo htmlspecialchars($row['Categoria']);
+                echo '<input type="checkbox" name="categorias[]" value="' . htmlspecialchars($categoria['id_categoria']) . '" ' . $checked . '>';
+                echo htmlspecialchars($categoria['nombre']);
                 echo '</label>';
                 echo '</div>';
             }
@@ -86,20 +81,20 @@
         // Añadir filtros si hay categorías seleccionadas
         if (!empty($categoriasSeleccionadas)) {
             $placeholders = str_repeat('?,', count($categoriasSeleccionadas) - 1) . '?';
-            $sql .= " AND Categoria IN ($placeholders)";
+            $sql .= " AND id_categoria IN ($placeholders)";
             $params = $categoriasSeleccionadas;
         }
 
         // Ejecutar la consulta
-        $stmt = $db->prepare($sql);
+        $stmt = $conection->prepare($sql);
         $stmt->execute($params);
 
         // Mostrar resultados
         while ($producto = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo '<div class="producto-card">';
             echo '<h3>' . htmlspecialchars($producto['Nombre']) . '</h3>';
-            echo '<p>Categoría: ' . htmlspecialchars($producto['Categoria']) . '</p>';
-            echo '<p>Precio: €' . htmlspecialchars($producto['Precio']) . '</p>';
+            echo '<p>Categoría: ' . htmlspecialchars($producto['id_categoria']) . '</p>';
+            echo '<p>Precio: €' . htmlspecialchars($producto['PrecioUnidad']) . '</p>';
             // Añade más detalles del producto según tu estructura de base de datos
             echo '</div>';
         }
