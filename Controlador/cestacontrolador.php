@@ -2,9 +2,10 @@
 <?php
 require_once 'Modelo/cestamodelo.php';
 require_once __DIR__. '/../Modelo/BDDConection.php';
-
+$idprducto = isset($_POST['ID']) ? (int)$_POST['ID'] : 0;
 class CestaController {
     private $modelo;
+
 
     public function __construct($db) {
         $this->modelo = new Cesta($db);
@@ -20,7 +21,16 @@ class CestaController {
 
         $usuario_id = $_SESSION['usuario_id'];
         $productos = $this->modelo->obtenerCesta($usuario_id);
-
-        require 'Vista/Vistacesta.php'; // Cargar la vista con los productos
+        
+        }
+        public function mostrarCesta1() {
+            // Simulación de productos en la cesta
+            $productos = [
+                ['producto_id' => 1, 'cantidad' => 2],
+                ['producto_id' => 2, 'cantidad' => 1],
+            ];
+    
+        }
+    
+        
     }
-}

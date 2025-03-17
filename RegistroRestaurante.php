@@ -12,7 +12,6 @@
     <main>
         <div class="productos">
             <?php
-            
 
                 //icnluir la vista de los productos de el restaurante 
              include_once 'Vista/VistaProductos.php'; 
