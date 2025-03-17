@@ -1,5 +1,7 @@
 <?php
 // View/PagoView.php
+include $_SERVER['DOCUMENT_ROOT'] . '/ProjectaRapidgo/Vista/pagoModel.php';
+
 class PagoView {
     public static function mostrarFormulario() {
         echo '<style>
@@ -93,4 +95,12 @@ class PagoView {
     public static function mostrarResultado($mensaje) {
         echo "<p>$mensaje</p>";
     }
+    
+    public function procesarPago($monto, $metodo) {
+        // Lógica para procesar el pago
+        // Retorna el resultado del procesamiento
+        return "Pago de $monto procesado con el método $metodo.";
+    }
+
+
 }
