@@ -7,7 +7,7 @@
 <body>
     <header>
         <?php include 'Vista/Vistaheader.php'; ?>
-
+        <button onclick="location.href='Vista/ResenaView.php'" class="btn-resena">Reseñas</button>
     </header>
     <main>
         <div class="productos">

@@ -23,11 +23,11 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
         include __DIR__.'./Vista/Menus.php';
         break;
     case 'Usuario':
-        include __DIR__.'./Resource_usuario.php';
-         break;
+        include __DIR__.'/Resource_usuario.php';
+        break;
     case 'RestauranteMenu':
-            include __DIR__.'./RegistroRestaurante.php';
-            break;
+        include __DIR__.'/RegistroRestaurante.php';
+        break;
     case 'Filtro':
         include __DIR__.'/resource_filtro.php';
         break;

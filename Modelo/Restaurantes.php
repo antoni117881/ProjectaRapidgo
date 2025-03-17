@@ -17,7 +17,7 @@ class RestaurantesModelo {
         }
     }
 
-    public function obtenerRestauranteId() {
+    public function obtenerRestauranteId($id) {
         try {
             $consulta = $this->db->prepare("SELECT * FROM restaurantes WHERE ID = :id");
             $consulta->bindParam(':id', $id, PDO::PARAM_INT);
@@ -30,8 +30,10 @@ class RestaurantesModelo {
         }
     }
 
-    public function RestaurantesInicio() {
-        return $this->obtenerTodosRestaurantes();//logica de obtener restauranetes
-        return $this->obtenerRestauranteId($id); // logica de restaurantes por id
+    public function RestaurantesInicio($id = null) {
+        if ($id !== null) {
+            return $this->obtenerRestauranteId($id); // lógica de restaurantes por id
+        }
+        return $this->obtenerTodosRestaurantes(); // lógica de obtener restaurantes
     }
 }

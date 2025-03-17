@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $updateStmt->bindParam(":id", $row['id']);
                 $updateStmt->execute();
                 
-                header("Location: ../menu.php");
+                header("Location: ../Resource_usuario.php");
                 exit();
             } else {
                 header("Location: ../Resource_login.php?error=Contraseña incorrecta");
