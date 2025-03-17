@@ -65,7 +65,7 @@
         <?php
         $servername = "localhost";
         $username = "root";
-        $password = "contraseña";
+        $password = "";
         $dbname = "rapidgobdd";
 
         $conn = new mysqli($servername, $username, $password, $dbname);

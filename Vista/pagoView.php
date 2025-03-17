@@ -1,6 +1,6 @@
 <?php
 // View/PagoView.php
-include $_SERVER['DOCUMENT_ROOT'] . '/ProjectaRapidgo/Vista/pagoModel.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/ProjectaRapidgo/Controller/Pago.php';
 
 class PagoView {
     public static function mostrarFormulario() {
