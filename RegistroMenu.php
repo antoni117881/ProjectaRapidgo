@@ -14,11 +14,18 @@
     <main>
         <div class="productos">
             <?php
-                //icnluir la vista de los restaurantes 
+                // Mostrar el usuario conectado
+                if (isset($_SESSION['user_name'])) {
+                    echo "<p>El usuario conectado es: " . htmlspecialchars($_SESSION['user_name']) . "</p>";
+                } else {
+                    echo "<p>No hay usuario conectado.</p>";
+                }
                 
-                
-             include_once 'Vista/VistaRestaurantes.php'; 
-             
+                // Incluir la vista de los restaurantes 
+                include_once 'Vista/VistaRestaurantes.php';
+                include 'Vista/filtro_productos.php';
+
+                 
             ?>
         </div>
     </main>

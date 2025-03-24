@@ -6,6 +6,8 @@ $productos = isset($productos) ? $productos : [];
 ?>
 <h2>Tu cesta</h2>
 <ul>
+<?php include 'Vista/Vistaheader.php';  
+echo $producto['ID']; ?>
     <?php foreach ($productos as $producto): ?>
         <li>
             Producto ID: <?= $producto['producto_id'] ?> - Cantidad: <?= $producto['cantidad'] ?>

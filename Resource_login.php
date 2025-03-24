@@ -18,7 +18,7 @@
             margin-bottom: 15px;
         }
         .error-message {
-            color: red;
+            color: red; 
             margin-bottom: 15px;
         }
     </style>
@@ -76,19 +76,7 @@
             </button>
         </form>
         
-        <div class="social-login">
-            <p>O inicia sesión con:</p>
-            <div class="social-buttons">
-                <a href="Controller/google_login.php" class="btn-social btn-google">
-                    <i class="fab fa-google"></i>
-                    Iniciar sesión con Google
-                </a>
-                <a href="Controller/facebook_login.php" class="btn-social btn-facebook">
-                    <i class="fab fa-facebook-f"></i>
-                    Iniciar sesión con Facebook
-                </a>
-            </div>
-        </div>
+        
         
         <div class="links">
             <a href="Resource_registro.php">
