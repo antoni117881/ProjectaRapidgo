@@ -18,7 +18,7 @@
             margin-bottom: 15px;
         }
         .error-message {
-            color: red;
+            color: red; 
             margin-bottom: 15px;
         }
     </style>
