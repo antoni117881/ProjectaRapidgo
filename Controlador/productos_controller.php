@@ -9,12 +9,13 @@ $restauranteModelo = new RestaurantesModelo($conection);
 
 // Obtener el ID del restaurante desde la solicitud POST
 $idRestaurante = isset($_POST['idRestaurante']) ? (int)$_POST['idRestaurante'] : 0;
-
+echo $idRestaurante ;
 if ($idRestaurante > 0) {
     $productos = $productoModelo->obtenerProductosPorRestaurante($idRestaurante);
     $cantidadProductos = count($productos); // Contar productos encontrados
 } else {
     die("ID de restaurante no válido.");
+    
 }
 
 // Verificar si se ha enviado un ID de producto

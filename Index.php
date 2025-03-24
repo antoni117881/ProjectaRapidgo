@@ -13,9 +13,7 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
         include __DIR__.'/Resource_registro.php';
          break;
              
-    case 'Restaurantes':
-        include __DIR__.'./Vista/restaurantes.php';
-          break;
+    
     case 'Ofertas':
         include __DIR__.'./Vista/Ofertas.php';
         break;
@@ -48,7 +46,7 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
             include __DIR__.'/Resource_register.php';
             break;
         case 'Restaurantes':
-            include __DIR__.'./Vista/restaurantes.php';
+            include __DIR__.'./Vista/VistaRestaurantessolo.php';
             break;
         case 'Ofertas':
             include __DIR__.'./Vista/Ofertas.php';
