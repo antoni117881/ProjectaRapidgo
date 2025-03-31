@@ -1,15 +1,30 @@
 <header>
     <style>
+        
         .navbar {
-            background-color: #ffffff !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            padding: 15px 0;
-        }
+    width: 100%;
+    height: 85px;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b, #86a8e7);
+    background-size: 200% 100%;
+    animation: moveGradient 5s ease-in-out infinite alternate;
+    font-family: 'Delius', cursive ;
+    text-shadow: 0px 0px 4px rgba(161, 11, 11, 0.91);
+
+}
+
+@keyframes moveGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
 
         .navbar-brand {
             font-size: 24px;
             font-weight: bold;
-            color: #007bff !important;
+            color:rgb(222, 35, 10) !important;
         }
 
         .nav-link {
@@ -20,7 +35,8 @@
         }
 
         .nav-link:hover {
-            color: #007bff !important;
+            color:rgb(255, 255, 255) !important;
+            
         }
 
         .container-fluid {
@@ -56,7 +72,7 @@
 
         /* Estilo específico para el botón Mi cuenta (solo icono) */
         .nav-Us .nav-link[href="?action=Usuario"] {
-            background-color: #007bff;
+            background-color:rgb(255, 94, 0);
             color: white !important;
             padding: 10px;
             border-radius: 50%; /* Hace el botón circular */
@@ -81,6 +97,8 @@
     </style>
 
     <!-- Asegúrate de incluir Font Awesome en el head de tu documento -->
+    <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">

@@ -16,8 +16,11 @@
     position: relative;
     z-index: 1; /* Asegura que el contenido esté encima del video */
     text-align: center;
-    color:#832323;
+    color:white;
     padding: 2rem;
+    background: linear-gradient(0deg,rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.37),rgba(0, 0, 0, 0.72));
+    text-shadow: 0px 0px 4px rgba(161, 37, 37, 0.91);
+
     
 }
 
@@ -30,11 +33,27 @@
     object-fit: cover; /* Asegura que el video cubra todo el contenedor */
     z-index: -1; /* Envía el video al fondo */
 }
+.separador{
+    width: 100%;
+    height: 5px;
+    background:rgb(162, 52, 52);
+}
+.separador1{
+    width: 100%;
+    height: 2px;
+    background:rgb(112, 25, 25);
+}
+.separador2{
+    width: 100%;
+    height: 2px;
+    background:rgb(66, 107, 33);
+}
 </style>
 <body>
     <header>
         <?php include 'Vista/Vistaheader.php'; ?>
-        
+        <div class="separador1">
+                    </div>
     </header>
     <main>
 
@@ -47,9 +66,15 @@
                   </video>
                   <div class="hero__content">
                       
-                     <h1> <p class="hero__subtitle">DESCUBRE LSO MEJORES RESTAURANTES CERCA DE TI  </p></h1>
+                     <h1> <p class="hero__subtitle">DESCUBRE LOS MEJORES RESTAURANTES CERCA DE TI  </p></h1>
                   </div>
+                  
               </section>
+              
+              <div class="separador">
+                    </div>
+                    <div class="separador2">
+                    </div>
               <?php
                 // Incluir la vista de los restaurantes 
                 

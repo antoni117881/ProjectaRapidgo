@@ -6,7 +6,7 @@
     <title>Filtrar Productos</title>
     <style>
         .body {
-            background: rgb(255, 255, 255);
+            background: rgb(253, 224, 156);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         .filtros-container {
@@ -14,8 +14,7 @@
             width: 20%;
             padding: 20px;
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 2px 10px 10px rgba(0,0,0,0.1);
         }
         .filtros-container h3 {
             color: #333;
@@ -52,7 +51,7 @@
             width: calc(30% - 20px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
-            background: linear-gradient(145deg, #007bff, #0056b3);
+            background: linear-gradient(145deg,rgb(255, 183, 0),rgb(228, 68, 4));
             color: white;
             margin-bottom: 20px;
         }
@@ -75,24 +74,11 @@
             margin: 8px 0;
             font-size: 1.1em;
         }
-        .btn-filtrar {
-            background: #4CAF50;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 15px;
-            font-size: 1em;
-            transition: background 0.3s ease;
-        }
-        .btn-filtrar:hover {
-            background: #45a049;
-        }
+    
+      
         .boton2 {
             background: white;
-            color: #007bff;
+            color:rgb(221, 16, 16);
             padding: 10px 20px;
             border: none;
             border-radius: 25px;
@@ -124,7 +110,7 @@
 </head>
 <body class="body">
     <div class="filtros-container">
-        <h3>Filtrar por Categorías</h3>
+        <h3>Filtrar por Alergenos</h3>
         <form id="filtroForm" action="" method="GET">
             <?php
             require_once 'Controller/filtro.php';

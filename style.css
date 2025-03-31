@@ -35,7 +35,7 @@
 
 .nav-link {
     text-decoration: none; /* Elimina el subrayado de los enlaces */
-    color: #000; /* Cambia el color del texto según sea necesario */
+    color: #000000; /* Cambia el color del texto según sea necesario */
 }
 
 /* Efecto hover para las tarjetas de productos */
