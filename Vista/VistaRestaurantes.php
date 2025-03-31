@@ -10,16 +10,18 @@
                 if ($restaurantes) {    
                     ?>
                     <div id="restaurantCarousel" class="carousel slide" data-ride="carousel">
+                    <h1 class="titulo" >Nuestros Restaurantes</h1>
                         <div class="carousel-inner">
+                            
                             <?php
                             foreach ($restaurantes as $index => $restaurante) {
                                 $activeClass = $index === 0 ? 'active' : ''; // Solo el primer elemento debe ser activo
                                 ?>
                                 <div class="carousel-item <?php echo $activeClass; ?>">
+                                    
                                     <img src="<?php echo $restaurante['imagen']; ?>" class="d-block w-100" alt="<?php echo $restaurante['Nombre']; ?>" style="height: 700px; object-fit: cover;">
                                     <div class="carousel-caption d-none d-md-block">
-                                        <h5><?php echo $restaurante['Nombre']; ?></h5>
-                                        <p><?php echo $restaurante['Horario']; ?></p>
+                                        
                                         <p>Teléfono: <?php echo number_format($restaurante['Telefono'], 2); ?></p>
                                         <p>ID del restaurante: <?php echo $restaurante['ID']; ?></p>
                                         <form action="?action=RestauranteMenu" method="POST">
@@ -51,6 +53,11 @@
                             width: 100%; /* Asegura que la imagen ocupe todo el ancho */
                             height: 700px; /* Ajusta la altura aquí según tus necesidades */
                             object-fit: cover; /* Asegura que la imagen cubra el área del slider */
+                        }
+                        .titulo{
+                            justify-content : center;
+                            font-weight:600;
+                            font-size: 50px;
                         }
                     </style>
                     <?php

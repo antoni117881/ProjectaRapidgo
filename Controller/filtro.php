@@ -11,13 +11,6 @@ $productoModelo = new filtroModelo($conection);
 $categorias = $productoModelo->obtenerTodasCategorias(); // Asegúrate de que este método esté definido
 
 // Verifica si se obtuvieron categorías
-if ($categorias) {
-    foreach ($categorias as $categoria) {
-        echo 'Categoría: ' . htmlspecialchars($categoria['nombre']) . '<br>';
-    }
-} else {
-    echo "No se encontraron categorías.";
-}
 
 // Verificar si se han enviado categorías
 if (isset($_GET['categorias'])) {

@@ -15,6 +15,7 @@ if ($idRestaurante > 0) {
     $cantidadProductos = count($productos); // Contar productos encontrados
 } else {
     die("ID de restaurante no válido.");
+    
 }
 
 // Verificar si se ha enviado un ID de producto

@@ -5,50 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filtrar Productos</title>
     <style>
+        .body {
+            background: rgb(253, 224, 156);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
         .filtros-container {
             float: left;
             width: 20%;
-            padding: 15px;
-            background: #f5f5f5;
-            border-radius: 8px;
+            padding: 20px;
+            background: white;
+            box-shadow: 2px 10px 10px rgba(0,0,0,0.1);
+        }
+        .filtros-container h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
         }
         .productos-container {
             float: right;
             width: 75%;
             padding: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: flex-start;
         }
         .checkbox-group {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         .checkbox-group label {
-            display: block;
-            margin: 5px 0;
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
             cursor: pointer;
+            color: #444;
+            font-size: 0.95em;
+        }
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
         }
         .producto-card {
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-        }
-        .btn-filtrar {
-            background: #4CAF50;
-            color: white;
-            padding: 10px 15px;
             border: none;
-            border-radius: 4px;
+            padding: 15px;
+            border-radius: 20px;
+            width: calc(30% - 20px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            background: linear-gradient(145deg,rgb(255, 183, 0),rgb(228, 68, 4));
+            color: white;
+            margin-bottom: 20px;
+        }
+        .producto-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        .imagen-producto {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+        .producto-card h3 {
+            font-size: 1.4em;
+            margin: 10px 0;
+        }
+        .producto-card p {
+            margin: 8px 0;
+            font-size: 1.1em;
+        }
+    
+      
+        .boton2 {
+            background: white;
+            color:rgb(221, 16, 16);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
             cursor: pointer;
             width: 100%;
             margin-top: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
-        .btn-filtrar:hover {
-            background: #45a049;
+        .boton2:hover {
+            background: #f8f9fa;
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .precio {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+        }
+        .categoria {
+            font-size: 0.9em;
+            color: rgba(255,255,255,0.9);
+        }
+        .productos-container::after {
+            content: '';
+            flex: auto;
         }
     </style>
 </head>
-<body>
+<body class="body">
     <div class="filtros-container">
-        <h3>Filtrar por Categorías</h3>
+        <h3>Filtrar por Alergenos</h3>
         <form id="filtroForm" action="" method="GET">
             <?php
             require_once 'Controller/filtro.php';
@@ -68,7 +130,7 @@
                 echo '</div>';
             }
             ?>
-            <button type="submit" class="btn-filtrar">Aplicar Filtros</button>
+            
         </form>
     </div>
 
@@ -92,10 +154,14 @@
         // Mostrar resultados
         while ($producto = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo '<div class="producto-card">';
+            echo '<img class="imagen-producto" src="' . $producto['Imagen'] . '" alt="' . $producto['Nombre'] . '"/>';
             echo '<h3>' . htmlspecialchars($producto['Nombre']) . '</h3>';
-            echo '<p>Categoría: ' . htmlspecialchars($producto['id_categoria']) . '</p>';
-            echo '<p>Precio: €' . htmlspecialchars($producto['PrecioUnidad']) . '</p>';
-            // Añade más detalles del producto según tu estructura de base de datos
+            echo '<p class="categoria">Categoría: ' . htmlspecialchars($producto['id_categoria']) . '</p>';
+            echo '<p class="precio">€' . htmlspecialchars($producto['PrecioUnidad']) . '</p>';
+            echo '<form action="?action=registroProduct" method="POST">';
+            echo '<input type="hidden" name="idProducto" value="' . $producto['ID'] . '">';
+            echo '<button type="submit" class="boton2">Ver detalles del producto</button>';
+            echo '</form>';
             echo '</div>';
         }
 
