@@ -1,8 +1,10 @@
 <?php
-session_start();
+
 require_once __DIR__ . "/../Modelo/BDDConection.php";
 require_once __DIR__ . "/Check_email.php";
-
+header("Access-Control-Allow-Origin-localhost" );
+header("Access-Control-Allow-Methods:POST,GET,OPTIONS" );
+header("Access-Control-Allow-Header:Content-Type,Accept" );
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 

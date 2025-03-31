@@ -424,6 +424,17 @@ body{
     margin-bottom: 10px;
     text-transform: uppercase;
 }
+.filtro-container {
+  width: 450px;
+  height: 450px;
+  background-color: #e84343;
+  filter: blur(50%);
+  opacity: 0.8; /* Cambia 'blue' por el color que desees */
+  color: white; /* Cambia el color del texto si es necesario */
+  
+  border-radius: 8px; /* Opcional: añade bordes redondeados */
+  padding: 10px; /* Opcional: añade un poco de espacio interno */
+}
 .heading>h3{
     font-weight: 600;
     font-size: 22px;

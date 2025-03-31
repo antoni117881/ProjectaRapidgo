@@ -33,6 +33,10 @@
                                             <input type="hidden" name="idRestaurante" value="<?php echo $restaurantes['ID']; ?>">
                                             <button type="submit" class="btn btn-primary">Ver menú del restaurante</button>
                                         </form>
+                                        <form action="?action=reseñarestaurante" method="POST">
+                                            <input type="hidden" name="idRestaurante" value="<?php echo $restaurantes['ID']; ?>">
+                                            <button type="submit" class="btn btn-primary">reseña</button>
+                                        </form>
                                 </form>
                                 </div>
                             </div>

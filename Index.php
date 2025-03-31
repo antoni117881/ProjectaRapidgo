@@ -66,6 +66,9 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
         case 'home':
              include __DIR__.'/indexhome.html';
             break;
+            case 'login2':
+                include __DIR__.'/Controller/login.php';
+               break;
                 
             default:
             include __DIR__.'/RegistroMenu.php';

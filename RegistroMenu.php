@@ -4,30 +4,62 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
 </head>
+<style>
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 80vh; /* Ajusta la altura según tus necesidades */
+    overflow: hidden;
+}
+.hero__content {
+    position: relative;
+    z-index: 1; /* Asegura que el contenido esté encima del video */
+    text-align: center;
+    color:#832323;
+    padding: 2rem;
+    
+}
+
+.hero__video {
+    position: absolute;
+    top: 0%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que el video cubra todo el contenedor */
+    z-index: -1; /* Envía el video al fondo */
+}
+</style>
 <body>
     <header>
         <?php include 'Vista/Vistaheader.php'; ?>
-        <button onclick="location.href='Vista/ResenaView.php'" class="btn-resena">Reseñas</button>
-        <button onclick="location.href='Controller/pago.php'" class="btn-pago">Pagar</button>
-        <button onclick="location.href='Vista/CestaView.php'" class="btn-cesta">Cesta</button>
+        
     </header>
     <main>
+
         <div class="productos">
-            <?php
-                // Mostrar el usuario conectado
-                if (isset($_SESSION['user_name'])) {
-                    echo "<p>El usuario conectado es: " . htmlspecialchars($_SESSION['user_name']) . "</p>";
-                } else {
-                    echo "<p>No hay usuario conectado.</p>";
-                }
-                
+            
+                  <section class="hero">
+                  <video class="hero__video" autoplay muted loop>
+                      <source src="video/Food_Video.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                  <div class="hero__content">
+                      
+                     <h1> <p class="hero__subtitle">DESCUBRE LSO MEJORES RESTAURANTES CERCA DE TI  </p></h1>
+                  </div>
+              </section>
+              <?php
                 // Incluir la vista de los restaurantes 
-                include_once 'Vista/VistaRestaurantes.php';
+                
                 include 'Vista/filtro_productos.php';
 
                  
             ?>
+            
         </div>
     </main>
 </body>
+<script src="main1.js"></script>
 </html>
