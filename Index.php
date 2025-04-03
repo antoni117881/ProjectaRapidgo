@@ -12,8 +12,6 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
     case 'registro':
         include __DIR__.'/Resource_registro.php';
          break;
-             
-    
     case 'Ofertas':
         include __DIR__.'./Vista/Ofertas.php';
         break;
@@ -39,7 +37,7 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
         include __DIR__.'/Registrocesta.php';
         break;
     case 'Pagar':
-        include __DIR__.'/Vista/pagoView.php';
+        include __DIR__.'/Vista/pago.php';
         break;
 
     case 'Restaurantes':
@@ -52,11 +50,11 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
     case 'login2':
         include __DIR__.'/Controller/login.php';
         break;
-            
-        default:
-        include __DIR__.'/RegistroMenu.php';
-        break;
-    }
+        
+    default:
+    include __DIR__.'/RegistroMenu.php';
+    break;
+}
 ?>
 <html>
     <body>
