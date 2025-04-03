@@ -39,6 +39,8 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
     case 'Pagar':
         include __DIR__.'/Vista/pago.php';
         break;
+    case 'Cesta':
+        include __DIR__.'Vista/Vistacesta.php';
 
     case 'Restaurantes':
         include __DIR__.'./Vista/VistaRestaurantessolo.php';
