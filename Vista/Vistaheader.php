@@ -122,7 +122,7 @@
                 </li>
                 <button onclick="location.href='Vista/ResenaView.php'" class="btn-resena">Reseñas</button>
         <button onclick="location.href='Controller/pago.php'" class="btn-pago">Pagar</button>
-        <button onclick="location.href='Vista/CestaView.php'" class="btn-cesta">Cesta</button>
+        <button onclick="location.href='Vista/Vistacesta.php'" class="btn-cesta">Cesta</button>
             </ul>
             <div class="usu">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
