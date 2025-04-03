@@ -36,17 +36,22 @@
 .separador{
     width: 100%;
     height: 5px;
-    background:rgb(162, 52, 52);
+    background:rgb(231, 53, 53);
 }
 .separador1{
     width: 100%;
     height: 2px;
-    background:rgb(112, 25, 25);
+    background:rgb(210, 54, 54);
 }
 .separador2{
     width: 100%;
-    height: 2px;
+    height: 3px;
     background:rgb(66, 107, 33);
+}
+.separador3{
+    width: 100%;
+    height: 3px;
+    background:rgb(255, 255, 255);
 }
 </style>
 <body>
@@ -74,6 +79,8 @@
               <div class="separador">
                     </div>
                     <div class="separador2">
+                    </div>
+                    <div class="separador3">
                     </div>
               <?php
                 // Incluir la vista de los restaurantes 

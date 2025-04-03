@@ -5,9 +5,9 @@ require_once 'Controlador/productos_controller.php';
 
 <style>
     main {
-        max-width: 1200px;
-        margin: 0 auto;
+        max-width: 100%;
         padding: 20px;
+        overflow-x: hidden;
     }
 
     h1 {
@@ -26,92 +26,123 @@ require_once 'Controlador/productos_controller.php';
 
     .productos {
         display: flex;
-        flex-wrap: wrap;
-        gap: 25px;
-        justify-content: flex-start;
+        flex-wrap: nowrap;
+        gap: 20px;
+        padding: 20px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .productos::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .productos::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    .productos::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+
+    .productos::-webkit-scrollbar-thumb:hover {
+        background: #555;
     }
 
     .producto-card {
-        width: calc(33.33% - 25px);
-        border-radius: 20px;
-        overflow: hidden;
+        flex: 0 0 300px;
         background: white;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         transition: transform 0.3s ease;
     }
 
-    .producto-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-    }
-
     .producto-content {
-        padding: 20px;
+        padding: 15px;
     }
 
     .imagen-producto {
         width: 100%;
-        height: 250px;
+        height: 200px;
         object-fit: cover;
-        border-radius: 15px;
+        border-radius: 10px;
         margin-bottom: 15px;
     }
 
     .nombre-producto {
-        font-size: 1.4em;
+        font-size: 1.2em;
         color: #333;
-        margin: 10px 0;
+        margin: 8px 0;
         font-weight: 600;
     }
 
     .descripcion {
         color: #666;
-        margin: 10px 0;
-        font-size: 0.95em;
-        line-height: 1.5;
+        font-size: 0.9em;
+        margin: 8px 0;
     }
 
     .precio {
-        font-size: 1.3em;
         color: #007bff;
+        font-size: 1.3em;
         font-weight: bold;
-        margin: 15px 0;
+        margin: 12px 0;
     }
 
     .cantidad-input {
         width: 100%;
-        padding: 10px;
-        border: 2px solid #ddd;
-        border-radius: 15px;
-        margin: 10px 0;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
         text-align: center;
-        font-size: 1em;
+        margin: 8px 0;
     }
 
     .btn {
         width: 100%;
-        padding: 12px 20px;
+        padding: 10px;
         border: none;
-        border-radius: 25px;
+        border-radius: 6px;
         cursor: pointer;
         font-weight: 500;
-        transition: all 0.3s ease;
-        margin: 8px 0;
+        margin: 5px 0;
+        transition: all 0.2s ease;
     }
 
     .btn-primary {
-        background: linear-gradient(145deg, #007bff, #0056b3);
+        background: #007bff;
         color: white;
     }
 
     .btn-success {
-        background: linear-gradient(145deg, #28a745, #218838);
+        background: #28a745;
         color: white;
     }
 
     .btn:hover {
-        transform: scale(1.02);
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        opacity: 0.9;
+        transform: translateY(-2px);
+    }
+
+    .producto-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Responsive */
+    @media (min-width: 992px) {
+        .productos {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .productos {
+            grid-template-columns: 1fr;
+        }
     }
 
     .no-productos {
