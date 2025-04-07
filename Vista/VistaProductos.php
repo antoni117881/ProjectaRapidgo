@@ -158,6 +158,7 @@ require_once 'Controlador/productos_controller.php';
         width: 100%;
         padding: 40px;
     }
+    
 </style>
 
 <main>

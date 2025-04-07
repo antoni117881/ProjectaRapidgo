@@ -24,6 +24,7 @@
     
 }
 
+
 .hero__video {
     position: absolute;
     top: 0%;

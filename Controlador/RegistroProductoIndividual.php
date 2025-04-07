@@ -13,7 +13,7 @@ $productoModelo = new ProductoModelo($conection);
 // Obtener el ID del producto desde la solicitud POST
 $idProducto = isset($_POST['idProducto']) ? (int)$_POST['idProducto'] : 0;
 
-echo "ID del producto recibido: " . $idProducto . "<br>"; // Para depuración
+
 
 if (isset($_POST['add_to_cart'])) {
     $producto_id = $_POST['producto_id'];
@@ -45,7 +45,7 @@ if ($idProducto > 0) {
         die("Producto no encontrado. ID buscado: " . $idProducto);
     } else {
         // Aquí deberías añadir el producto a la cesta
-        echo "Producto encontrado: " . $producto['nombre'] . "<br>"; // Asegúrate de que el campo 'nombre' existe
+         // Asegúrate de que el campo 'nombre' existe
         // Lógica para añadir el producto a la cesta
     }
 } else {
