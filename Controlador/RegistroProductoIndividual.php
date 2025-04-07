@@ -1,6 +1,8 @@
 <?php
 // Asegúrate de que no haya salida antes de esta línea
-session_start(); // Asegúrate de que la sesión esté iniciada para gestionar el carrito
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Asegúrate de que la sesión esté iniciada para gestionar el carrito
+}
 
 require_once __DIR__. '/../Modelo/Productoss.php';
 require_once __DIR__. '/../Modelo/BDDConection.php';

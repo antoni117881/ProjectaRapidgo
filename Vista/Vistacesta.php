@@ -106,6 +106,8 @@ echo getcwd(); // Esto mostrará el directorio de trabajo actual
 
         <br>
         <a href="index.php">Volver al catálogo</a>
+        <br>
+        <a href="pago.php" class="btn-pagar">Pagar</a>
     </main>
 </body>
 </html>

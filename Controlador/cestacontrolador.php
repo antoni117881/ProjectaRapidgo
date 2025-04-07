@@ -16,7 +16,6 @@ class CestaController {
 
     public function mostrarCesta() {
         if (!isset($_SESSION['usuario_id'])) {
-            echo "Debes iniciar sesión para ver la cesta.";
             header("Location: login.php"); // Redirigir a la página de inicio de sesión
             exit();
         }
@@ -27,11 +26,13 @@ class CestaController {
         // Mostrar los productos en la cesta
         if (!empty($productos)) {
             foreach ($productos as $producto) {
-                echo "Producto ID: " . $producto['producto_id'] . " - Cantidad: " . $producto['cantidad'] . "<br>";
+                echo "Producto ID: " . htmlspecialchars($producto['producto_id']) . " - Cantidad: " . htmlspecialchars($producto['cantidad']) . "<br>";
             }
         } else {
             echo "La cesta está vacía.";
         }
+
+        var_dump($productos); // Agrega esta línea para ver los productos
     }
 
     public function mostrarCesta1() {

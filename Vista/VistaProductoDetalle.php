@@ -1,7 +1,11 @@
 <?php
 
 require_once 'Controlador/RegistroProductoIndividual.php';
-session_start(); // Asegúrate de que la sesión esté iniciada para gestionar el carrito.
+
+// Verifica si la sesión ya está iniciada
+if (session_status() == PHP_SESSION_NONE) {
+    session_start(); // Asegúrate de que la sesión esté iniciada para gestionar el carrito.
+}
 
 if (isset($_POST['add_to_cart'])) {
     $producto_id = $_POST['producto_id'];
@@ -33,7 +37,6 @@ if (isset($_POST['add_to_cart'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles del Producto</title>
-    <link rel="stylesheet" href="style.css">
     <style>
         /* Estilo general */
         body {
