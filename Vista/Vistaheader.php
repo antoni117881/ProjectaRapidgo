@@ -14,6 +14,8 @@
     align-items: center;
     padding: 0 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 25;
+
 }
 
 @keyframes moveGradient {
@@ -148,15 +150,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="?action=Ofertas">Ofertas</a>
                 </li>
-                <li class="nav-item">
-                    <button onclick="location.href='Vista/ResenaView.php'" class="btn-resena">Reseñas</button>
-                </li>
-                <li class="nav-item">
-                    <button onclick="location.href='Controller/pago.php'" class="btn-pago">Pagar</button>
-                </li>
-                <li class="nav-item">
-                    <button onclick="location.href='Vista/Vistacesta.php'" class="btn-cesta">Cesta</button>
-                </li>
+                <button onclick="location.href='Vista/ResenaView.php'" class="btn-resena">Reseñas</button>
+        <button onclick="location.href='Controller/pago.php'" class="btn-pago">Pagar</button>
+        <button onclick="location.href='Vista/CestaView.php'" class="btn-cesta">Cesta</button>
             </ul>
             <div class="usu">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">

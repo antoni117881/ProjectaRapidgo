@@ -90,19 +90,16 @@
         color: #666;
         font-size: 1.2em;
     }
-    .boton {
-            background: rgb(218, 16, 221);
-            border-radius: 10px;
-            text-align: center;
-            font-weight: 500;
+   
+        .producto-card{
+            width: 25%;
+            padding: 15px;
         }
-        .boton2 {
-            background: rgb(218, 16, 221);
+        .boton{
+            background-color: rgb(239, 238, 238);
+            border: 3px rgba(90, 139, 49, 0.78) solid;
             border-radius: 10px;
-            
-            text-align: center;
-            font-weight: 500;
-            color:rgb(255, 0, 38);
+            color:rgb(221, 16, 16);
         }
 </style>
 
@@ -131,9 +128,9 @@ if ($restaurantes) {
                             <button type="submit" class="btn">Ver menú del restaurante</button>
                         </form>
                         
-                        <form action="?action=reseñarestaurante" method="POST" class="boton2">
+                        <form action="?action=reseñarestaurante" method="POST" class="boton">
                             <input type="hidden" name="idRestaurante" value="<?php echo $restaurante['ID']; ?>">
-                            <button type="submit" class="btn-primary">Ver reseñas</button>
+                            <button type="submit" class="btn">Ver reseñas</button>
                         </form>
                     </div>
                 </div>
