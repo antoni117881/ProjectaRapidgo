@@ -85,11 +85,16 @@
               <?php
                 // Incluir la vista de los restaurantes 
                 include 'Vista/Resource_search.php';
-                include 'Vista/filtro_productos.php';
+                
 
                  
             ?>
             
+        </div>
+        <div>
+            <?php
+            include 'Vista/filtro_productos.php';
+            ?>
         </div>
     </main>
 </body>
