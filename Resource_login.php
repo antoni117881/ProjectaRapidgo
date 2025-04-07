@@ -18,11 +18,14 @@
             margin-bottom: 15px;
         }
         .error-message {
-            color: red;
+            color: red; 
             margin-bottom: 15px;
         }
     </style>
 </head>
+<header>
+<?php include 'Vista/Vistaheader.php'; ?>
+</header>
 <body>
     <div class="login-container">
         <div class="logo-container">
@@ -38,7 +41,7 @@
             </div>
         <?php endif; ?>
         
-        <form action="Controller/login.php" method="POST" onsubmit="return validarFormulario()">
+        <form action="?action=" method="POST"   onsubmit="return validarFormulario()">
             <div class="form-group">
                 <label for="email">Correo Electrónico:</label>
                 <div class="input-group">
@@ -73,20 +76,10 @@
             </button>
         </form>
         
-        <div class="social-login">
-            <p>O inicia sesión con:</p>
-            <div class="social-buttons">
-                <a href="#" class="btn-social btn-google">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a href="#" class="btn-social btn-facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-            </div>
-        </div>
+        
         
         <div class="links">
-            <a href="register.php">
+            <a href="Resource_registro.php">
                 <i class="fas fa-user-plus"></i>
                 ¿No tienes cuenta? Regístrate
             </a>

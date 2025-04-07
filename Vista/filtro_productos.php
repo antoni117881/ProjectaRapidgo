@@ -5,75 +5,193 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filtrar Productos</title>
     <style>
+        .body {
+            background: rgb(253, 224, 156);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
         .filtros-container {
             float: left;
             width: 20%;
-            padding: 15px;
-            background: #f5f5f5;
-            border-radius: 8px;
+            padding: 20px;
+            background: white;
+            box-shadow: 2px 10px 10px rgba(0,0,0,0.1);
+        }
+        .filtros-container h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.5em;
         }
         .productos-container {
             float: right;
             width: 75%;
             padding: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: flex-start;
         }
         .checkbox-group {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            position: relative;
         }
-        .checkbox-group label {
-            display: block;
-            margin: 5px 0;
+        .checkbox-group input[type="checkbox"] {
+            /* Ocultamos el checkbox original */
+            opacity: 0;
+            position: absolute;
             cursor: pointer;
         }
-        .producto-card {
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            cursor: pointer;
+            color: #444;
+            font-size: 0.95em;
+            padding-left: 35px; /* Espacio para el nuevo checkbox */
+            position: relative;
         }
-        .btn-filtrar {
-            background: #4CAF50;
-            color: white;
-            padding: 10px 15px;
+        /* Creamos el nuevo checkbox personalizado */
+        .checkbox-group label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 22px;
+            height: 22px;
+            border: 2px solid rgb(238, 169, 72);
+            border-radius: 6px;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+        /* Creamos el check (✓) */
+        .checkbox-group label::after {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%) scale(0);
+            width: 6px;
+            height: 12px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform-origin: center;
+            transform: translateY(-65%) rotate(45deg) scale(0);
+            transition: all 0.2s ease;
+        }
+        /* Estilo cuando el checkbox está marcado */
+        .checkbox-group input[type="checkbox"]:checked + label::before {
+            background-color: #007bff;
+            border-color:rgb(213, 143, 30);
+        }
+        .checkbox-group input[type="checkbox"]:checked + label::after {
+            transform: translateY(-65%) rotate(45deg) scale(1);
+        }
+        /* Efecto hover */
+        .checkbox-group label:hover::before {
+            border-color: #0056b3;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+        /* Efecto focus para accesibilidad */
+        .checkbox-group input[type="checkbox"]:focus + label::before {
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+        }
+        .producto-card {
             border: none;
-            border-radius: 4px;
+            padding: 15px;
+            border-radius: 10px;
+            width: calc(30% - 20px);
+            box-shadow: 0 0px 10px rgba(0, 0, 0, 0.34);
+            transition: transform 0.3s ease;
+            background: linear-gradient(145deg,rgb(255, 183, 0),rgb(228, 68, 4));
+            color: white;
+            margin-bottom: 20px;
+            
+        }
+        .product-card{
+            box-shadow: 0 -3px 5px rgb(0, 0, 0);
+        }
+        .producto-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 10px rgba(0,0,0,0.2);
+        }
+        .imagen-producto {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border: 3px rgba(90, 139, 49, 0.78) solid;
+        }
+        .producto-card h3 {
+            font-size: 1.4em;
+            margin: 10px 0; 
+        }
+        .producto-card p {
+            margin: 8px 0;
+            font-size: 1.1em;
+        }
+    
+      
+        .boton2 {
+            background: white;
+            color:rgb(221, 16, 16);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
             cursor: pointer;
             width: 100%;
             margin-top: 10px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 3px rgba(90, 139, 49, 0.78) solid;
         }
-        .btn-filtrar:hover {
-            background: #45a049;
+        .boton2:hover {
+            background: #f8f9fa;
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .precio {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+        }
+        .categoria {
+            font-size: 0.9em;
+            color: rgba(255,255,255,0.9);
+        }
+        .productos-container::after {
+            content: '';
+            flex: auto;
+        }
+        .checkbox-group >input{
+            border: 5px rgba(90, 139, 49, 0.78) solid;
+            
         }
     </style>
 </head>
-<body>
+<body class="body">
     <div class="filtros-container">
-        <h3>Filtrar por Categorías</h3>
+        <h3>Filtrar por Alergenos</h3>
+        <br>
         <form id="filtroForm" action="" method="GET">
             <?php
-            // Obtener categorías de la base de datos
-            require_once "../Model/Conection_BD.php";
-            $database = new Database();
-            $db = $database->getConnection();
-            
-            $query = "SELECT DISTINCT Categoria FROM productos ORDER BY Categoria";
-            $stmt = $db->prepare($query);
-            $stmt->execute();
-            
+            require_once 'Controller/filtro.php';
+            require_once __DIR__. '/../Modelo/BDDConection.php';
+           
+
             // Obtener categorías seleccionadas previamente
             $categoriasSeleccionadas = isset($_GET['categorias']) ? $_GET['categorias'] : [];
             
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $checked = in_array($row['Categoria'], $categoriasSeleccionadas) ? 'checked' : '';
+            foreach ($categorias as $categoria) {
+                $checked = in_array($categoria['id_categoria'], $categoriasSeleccionadas) ? 'checked' : '';
                 echo '<div class="checkbox-group">';
-                echo '<label>';
-                echo '<input type="checkbox" name="categorias[]" value="' . htmlspecialchars($row['Categoria']) . '" ' . $checked . '>';
-                echo htmlspecialchars($row['Categoria']);
-                echo '</label>';
+                echo '<input type="checkbox" id="cat_' . $categoria['id_categoria'] . '" name="categorias[]" value="' . htmlspecialchars($categoria['id_categoria']) . '" ' . $checked . '>';
+                echo '<label for="cat_' . $categoria['id_categoria'] . '">' . htmlspecialchars($categoria['nombre']) . '</label>';
                 echo '</div>';
             }
             ?>
-            <button type="submit" class="btn-filtrar">Aplicar Filtros</button>
+            
         </form>
     </div>
 
@@ -86,21 +204,25 @@
         // Añadir filtros si hay categorías seleccionadas
         if (!empty($categoriasSeleccionadas)) {
             $placeholders = str_repeat('?,', count($categoriasSeleccionadas) - 1) . '?';
-            $sql .= " AND Categoria IN ($placeholders)";
+            $sql .= " AND id_categoria IN ($placeholders)";
             $params = $categoriasSeleccionadas;
         }
 
         // Ejecutar la consulta
-        $stmt = $db->prepare($sql);
+        $stmt = $conection->prepare($sql);
         $stmt->execute($params);
 
         // Mostrar resultados
         while ($producto = $stmt->fetch(PDO::FETCH_ASSOC)) {
             echo '<div class="producto-card">';
+            echo '<img class="imagen-producto" src="' . $producto['Imagen'] . '" alt="' . $producto['Nombre'] . '"/>';
             echo '<h3>' . htmlspecialchars($producto['Nombre']) . '</h3>';
-            echo '<p>Categoría: ' . htmlspecialchars($producto['Categoria']) . '</p>';
-            echo '<p>Precio: €' . htmlspecialchars($producto['Precio']) . '</p>';
-            // Añade más detalles del producto según tu estructura de base de datos
+            echo '<p class="categoria">Categoría: ' . htmlspecialchars($producto['id_categoria']) . '</p>';
+            echo '<p class="precio">€' . htmlspecialchars($producto['PrecioUnidad']) . '</p>';
+            echo '<form action="?action=registroProduct" method="POST">';
+            echo '<input type="hidden" name="idProducto" value="' . $producto['ID'] . '">';
+            echo '<button type="submit" class="boton2">Ver detalles del producto</button>';
+            echo '</form>';
             echo '</div>';
         }
 

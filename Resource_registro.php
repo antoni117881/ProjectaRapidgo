@@ -87,6 +87,9 @@
         }
     </style>
 </head>
+<header>
+<?php include 'Vista/Vistaheader.php'; ?>
+</header>
 <body>
     <div class="form-container">
         <h2 style="text-align: center; color: #333; margin-bottom: 30px;">Registro de Usuario</h2>
@@ -98,7 +101,7 @@
             </div>
         <?php endif; ?>
         
-        <form action="Controller/registro.php" method="POST" onsubmit="return validarFormulario()">
+        <form action="?action=Login" method="POST" onsubmit="return validarFormulario()">
             <div class="form-group">
                 <label for="nombre">Nombre de Usuario:</label>
                 <div class="input-group">
@@ -172,7 +175,7 @@
                 </div>
             </div>
             
-            <button type="submit" class="btn-submit">
+            <button type="submit" class="btn-submit" >
                 <i class="fas fa-user-plus"></i> Registrarse
             </button>
         </form>
