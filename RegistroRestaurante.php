@@ -1,3 +1,11 @@
+<style>
+    .body{
+        margin:0;
+        padding: 0;
+        box-sizing:border-box;
+        background: rgba(255, 177, 100, 0.97);
+    }
+    </style>
 <html>
 <head>
     <title>Página Productos</title>

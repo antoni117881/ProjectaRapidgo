@@ -9,6 +9,7 @@
     animation: moveGradient 5s ease-in-out infinite alternate;
     font-family: 'Delius', cursive ;
     text-shadow: 0px 0px 4px rgba(161, 11, 11, 0.91);
+    font-size: 25;
 
 }
 
@@ -121,7 +122,6 @@
                     <a class="nav-link active" aria-current="page" href="?action=Ofertas">Ofertas</a>
                 </li>
                 <button onclick="location.href='Vista/ResenaView.php'" class="btn-resena">Reseñas</button>
-        <button onclick="location.href='Controller/pago.php'" class="btn-pago">Pagar</button>
         <button onclick="location.href='Vista/CestaView.php'" class="btn-cesta">Cesta</button>
             </ul>
             <div class="usu">

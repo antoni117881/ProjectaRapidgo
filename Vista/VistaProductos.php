@@ -4,6 +4,12 @@ require_once 'Controlador/productos_controller.php';
 ?>
 
 <style>
+    .body{
+        margin:0;
+        padding: 0;
+        box-sizing:border-box;
+        background: rgba(255, 177, 100, 0.97);
+    }
     main {
         max-width: 100%;
         padding: 20px;
