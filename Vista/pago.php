@@ -49,7 +49,7 @@
 </head>
 <body>
 
-    <form method="POST" action="/ProjectaRapidgo/Controller/PagoController.php" class="pago-form">
+    <form method="POST" action="/ProjectaRapidgo/Controlador/PagoController.php" class="pago-form">
 
         <h2>Formulario de Pago</h2>
         

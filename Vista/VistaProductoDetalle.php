@@ -1,6 +1,31 @@
 <?php
+
 require_once 'Controlador/RegistroProductoIndividual.php';
 session_start(); // Asegúrate de que la sesión esté iniciada para gestionar el carrito.
+
+if (isset($_POST['add_to_cart'])) {
+    $producto_id = $_POST['producto_id'];
+    $producto_nombre = $_POST['producto_nombre'];
+    $producto_precio = $_POST['producto_precio'];
+    $producto_imagen = $_POST['producto_imagen'];
+
+    // Inicializa el carrito si no existe
+    if (!isset($_SESSION['carrito'])) {
+        $_SESSION['carrito'] = [];
+    }
+
+    // Añade el producto al carrito
+    $_SESSION['carrito'][$producto_id] = [
+        'nombre' => $producto_nombre,
+        'precio' => $producto_precio,
+        'imagen' => $producto_imagen,
+        'cantidad' => 1 // Puedes ajustar la cantidad según sea necesario
+    ];
+
+    // Redirige a la página del carrito
+    header('Location: Vistacesta.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -142,7 +167,7 @@ session_start(); // Asegúrate de que la sesión esté iniciada para gestionar e
     <main>
         <div class="producto-container">
             <h1>Detalles del Producto</h1>
-            <?php if (isset($producto) && !empty($producto)): ?>
+            <?php if (isset($producto) && !empty($producto) && isset($producto['Nombre'])): ?>
                 <div class="producto-detalle">
                     <div class="producto-imagen">
                         <img src="<?php echo $producto['Imagen']; ?>" alt="<?php echo $producto['Nombre']; ?>" />
@@ -153,7 +178,7 @@ session_start(); // Asegúrate de que la sesión esté iniciada para gestionar e
                         <p class="precio">Precio: $<?php echo number_format($producto['PrecioUnidad'], 2); ?></p>
                         
                         <!-- Botón Añadir al Carrito -->
-                        <form method="POST" action="Vistacesta.php">
+                        <form method="POST" action="Vista/Vistacesta.php">
                             <input type="hidden" name="producto_id" value="<?php echo $producto['ID']; ?>">
                             <input type="hidden" name="producto_nombre" value="<?php echo $producto['Nombre']; ?>">
                             <input type="hidden" name="producto_precio" value="<?php echo $producto['PrecioUnidad']; ?>">

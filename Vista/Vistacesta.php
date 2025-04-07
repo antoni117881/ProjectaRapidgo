@@ -1,20 +1,9 @@
 <?php   
 require_once __DIR__ . '/../Controlador/cestacontrolador.php';
-?>
 
-<h2>Tu cesta</h2>
-<ul>
-<?php include 'Vista/Vistaheader.php';  
-echo $producto['ID']; ?>
-    <?php foreach ($productos as $producto): ?>
-        <li>
-            Producto ID: <?= $producto['producto_id'] ?> - Cantidad: <?= $producto['cantidad'] ?>
-            <a href="/cesta/eliminar/<?= $producto['producto_id'] ?>">Eliminar</a>
-        </li>
-    <?php endforeach; ?>
-</ul>
-<a href="/cesta/vaciar">Vaciar Cesta</a>
-<?php
+// Asegúrate de que la ruta sea correcta
+include __DIR__ . '/Vistaheader.php';  // Usando ruta absoluta
+
 // Iniciar sesión si no se ha iniciado previamente
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -32,6 +21,7 @@ if (isset($_GET['eliminar'])) {
     foreach ($_SESSION['cesta'] as $key => $producto) {
         if ($producto['producto_id'] == $productoId) {
             unset($_SESSION['cesta'][$key]);
+            break; // Salir del bucle después de eliminar
         }
     }
     // Redirigir a la misma página para evitar el reenvío de formulario
@@ -46,9 +36,46 @@ if (isset($_GET['vaciar'])) {
     exit();
 }
 
-// Lógica para mostrar productos en la cesta
-$productos = $_SESSION['cesta'];
+// Lógica para añadir productos
+if (isset($_POST['producto_id']) && isset($_POST['cantidad'])) {
+    $productoId = $_POST['producto_id'];
+    $cantidad = $_POST['cantidad'];
+
+    // Añadir el producto a la cesta
+    $_SESSION['cesta'][] = [
+        'producto_id' => $productoId,
+        'cantidad' => $cantidad
+    ];
+
+    // Redirigir a la cesta
+    header("Location: cesta.php");
+    exit();
+}
+
+// Inicializa la variable $productos antes de usarla
+$productos = $_SESSION['cesta']; // Usar el operador de fusión null para evitar errores
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+echo getcwd(); // Esto mostrará el directorio de trabajo actual
 ?>
+
+<h2>Tu cesta</h2>
+<ul>
+    <?php if (empty($productos)): ?>
+        <p>No tienes productos en tu cesta.</p>
+    <?php else: ?>
+        <?php foreach ($productos as $producto): ?>
+            <li>
+                Producto ID: <?= $producto['producto_id'] ?> - Cantidad: <?= $producto['cantidad'] ?>
+                <a href="/cesta/eliminar/<?= $producto['producto_id'] ?>">Eliminar</a>
+            </li>
+        <?php endforeach; ?>
+        <a href="/cesta/vaciar">Vaciar Cesta</a>
+    <?php endif; ?>
+</ul>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -59,9 +86,6 @@ $productos = $_SESSION['cesta'];
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <?php include 'Vista/Vistaheader.php'; ?>
-    </header>
 
     <main>
         <h2>Tu Cesta</h2>

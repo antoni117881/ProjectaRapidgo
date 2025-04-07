@@ -90,6 +90,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Cerrar la conexión
     $conn->close();
 
-    echo "<a href='../Vista/pagoView.php'>Volver</a>";
+    echo "<a href='../Vista/pago.php'>Volver</a>";
 }
 ?>
