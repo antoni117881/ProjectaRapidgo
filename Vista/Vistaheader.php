@@ -9,7 +9,11 @@
     animation: moveGradient 5s ease-in-out infinite alternate;
     font-family: 'Delius', cursive ;
     text-shadow: 0px 0px 4px rgba(161, 11, 11, 0.91);
-
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 @keyframes moveGradient {
@@ -32,11 +36,13 @@
             font-weight: 500;
             margin: 0 10px;
             transition: color 0.3s;
+            padding: 10px;
+            border-radius: 5px;
         }
 
         .nav-link:hover {
-            color:rgb(255, 255, 255) !important;
-            
+            color: rgb(255, 255, 255) !important;
+            background-color: rgba(255, 94, 0, 0.7);
         }
 
         .container-fluid {
@@ -72,16 +78,17 @@
 
         /* Estilo específico para el botón Mi cuenta (solo icono) */
         .nav-Us .nav-link[href="?action=Usuario"] {
-            background-color:rgb(255, 94, 0);
+            background-color: rgb(255, 94, 0);
             color: white !important;
             padding: 10px;
-            border-radius: 50%; /* Hace el botón circular */
+            border-radius: 50%;
             width: 40px;
             height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .nav-Us .nav-link[href="?action=Usuario"]:hover {
@@ -93,6 +100,27 @@
         /* Ajustar tamaño del icono */
         .nav-Us .nav-link[href="?action=Usuario"] i {
             font-size: 18px;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-resena, .btn-pago, .btn-cesta {
+            border: 1px solid #333;
+            background-color: white;
+            color: #333;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-resena:hover, .btn-pago:hover, .btn-cesta:hover {
+            background-color: #ff7e5f;
+            color: white;
         }
     </style>
 
@@ -109,7 +137,7 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="navbar-brand" href="?action=">RAPIDGO</a>
+                    <a class="navbar-brand" href="index.php">RAPIDGO</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="?action=Restaurantes">Restaurantes</a>
@@ -120,9 +148,15 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="?action=Ofertas">Ofertas</a>
                 </li>
-                <button onclick="location.href='Vista/ResenaView.php'" class="btn-resena">Reseñas</button>
-        <button onclick="location.href='Controller/pago.php'" class="btn-pago">Pagar</button>
-        <button onclick="location.href='Vista/CestaView.php'" class="btn-cesta">Cesta</button>
+                <li class="nav-item">
+                    <button onclick="location.href='Vista/ResenaView.php'" class="btn-resena">Reseñas</button>
+                </li>
+                <li class="nav-item">
+                    <button onclick="location.href='Controller/pago.php'" class="btn-pago">Pagar</button>
+                </li>
+                <li class="nav-item">
+                    <button onclick="location.href='Vista/Vistacesta.php'" class="btn-cesta">Cesta</button>
+                </li>
             </ul>
             <div class="usu">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
