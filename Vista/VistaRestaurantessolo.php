@@ -75,6 +75,7 @@
     .descripcion::before {
         content: "📍";
         font-size: 1.2em;
+        color
     }
 
     .horario::before {

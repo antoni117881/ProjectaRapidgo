@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     try {
-        $query = "SELECT id, email, contraseña, nombre, estado FROM usuarios WHERE email = :email";
+        $query = "SELECT ID, Email, Contrasena, NombreUsuario,  FROM usuarios WHERE email = :email";
         $stmt = $db->prepare($query);
         $stmt->bindParam(":email", $email);
         $stmt->execute();
@@ -48,6 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             if (password_verify($password, $row['contraseña'])) {
                 // Login exitoso
+                session_start(); // Asegúrate de que la sesión esté iniciada
                 $_SESSION['user_id'] = $row['id'];
                 $_SESSION['user_email'] = $row['email'];
                 $_SESSION['user_name'] = $row['nombre'];
@@ -65,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $updateStmt->bindParam(":id", $row['id']);
                 $updateStmt->execute();
                 
-                header("Location: ../Resource_usuario.php");
+                header("Location: ../RegistroMenu.php");
                 exit();
             } else {
                 header("Location: ../Resource_login.php?error=Contraseña incorrecta");

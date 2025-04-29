@@ -13,15 +13,16 @@
     overflow: hidden;
 }
 .hero__content {
-    position: relative;
+    position: absolute;
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta la posición para centrar */
     z-index: 1; /* Asegura que el contenido esté encima del video */
     text-align: center;
-    color:white;
+    color: white;
     padding: 2rem;
-    background: linear-gradient(0deg,rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.37),rgba(0, 0, 0, 0.72));
+  
     text-shadow: 0px 0px 4px rgba(161, 37, 37, 0.91);
-
-    
 }
 
 
@@ -85,8 +86,8 @@
                     </div>
               <?php
                 // Incluir la vista de los restaurantes 
-                include 'Vista/Resource_search.php';
                 
+                include 'Vista/Resource_search.php';
 
                  
             ?>

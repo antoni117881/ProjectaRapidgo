@@ -4,6 +4,9 @@ require_once 'Controlador/productos_controller.php';
 ?>
 
 <style>
+    *{
+        margin:0;
+    }
     .body{
         margin:0;
         padding: 0;
@@ -37,7 +40,8 @@ require_once 'Controlador/productos_controller.php';
         padding: 20px;
         overflow-x: auto;
         scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
+        webkit-overflow-scrolling: touch;
+        align-items:center;
     }
 
     .productos::-webkit-scrollbar {
@@ -59,7 +63,7 @@ require_once 'Controlador/productos_controller.php';
     }
 
     .producto-card {
-        flex: 0 0 300px;
+        align-items:center;
         background: white;
         border-radius: 15px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -68,6 +72,7 @@ require_once 'Controlador/productos_controller.php';
 
     .producto-content {
         padding: 15px;
+        align-items:center;
     }
 
     .imagen-producto {

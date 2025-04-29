@@ -1,10 +1,6 @@
 <style>
     
-    .productos{
-        margin:0;
-        padding: 0;
-        background: rgba(255, 177, 100, 0.97);
-    }
+    
     .body{
         background: rgba(255, 177, 100, 0.97);
     }
@@ -15,7 +11,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="body">
     <header>
         <?php include 'Vista/Vistaheader.php'; ?>
 
