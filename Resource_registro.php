@@ -20,6 +20,7 @@
             align-items: center;
             justify-content: center;
             min-height: 90vh;
+            margin-top: 60px;
         }
         .form-container {
             background-color: white;
@@ -104,7 +105,9 @@
         }
         header {
             width: 100vw;
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
             z-index: 10;
             background: linear-gradient(90deg, #ff9800 0%, #ff5722 100%);
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
@@ -122,7 +125,7 @@
 </head>
 <body>
 <header>
-    <?php include 'Vista/Vistaheader.php'; ?>
+    <?php include 'Vista/Vistaheader.php'?>
 </header>
 <div class="main-wrapper">
     <div class="form-container">
@@ -133,7 +136,7 @@
                 <?php echo htmlspecialchars($_GET['error']); ?>
             </div>
         <?php endif; ?>
-        <form action="?action=Login" method="POST" onsubmit="return validarFormulario()">
+        <form action="Controller/registro.php" method="POST" onsubmit="return validarFormulario()">
             <div class="form-group">
                 <label for="nombre">Nombre de Usuario:</label>
                 <div class="input-group">

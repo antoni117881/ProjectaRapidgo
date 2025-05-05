@@ -159,8 +159,8 @@
                         <a class="nav-link active" aria-current="page" href="?action=Login">Login</a>
                     </li>
                     <li class="nav-item nav-Us">
-                        <a class="nav-link active" aria-current="page" href="?action=registro">Iniciar Sesion</a>
-                    </li>
+                        <a class="nav-link active" aria-current="page" href="?action=registro">Registro</a>
+                    </li> 
                     <li class="nav-item nav-Us">
                         <a class="nav-link active" aria-current="page" href="?action=Usuario">
                             <i class="fas fa-user"></i>
