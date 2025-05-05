@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="search-container">
-        <form action="Controller/search.php" method="GET" class="search-form">
+        <form id="searchForm" class="search-form">
             <div class="search-box">
                 <input type="text" name="query" id="searchInput" 
                        placeholder="Buscar productos, restaurantes o tipos de comida..."
@@ -24,10 +24,10 @@
                     <input type="checkbox" name="filter[]" value="productos" checked> Productos
                 </label>
                 <label>
-                    <input type="checkbox" name="filter[]" value="restaurantes" checked> Restaurantes
+                    <input type="checkbox" name="filter[]" value="restaurantes"> Restaurantes
                 </label>
                 <label>
-                    <input type="checkbox" name="filter[]" value="tipo_comida" checked> Tipo de Comida
+                    <input type="checkbox" name="filter[]" value="tipo_comida"> Tipo de Comida
                 </label>
             </div>
         </form>
@@ -86,39 +86,36 @@
     </style>
 
     <script>
+        const searchForm = document.getElementById('searchForm');
         const searchInput = document.getElementById('searchInput');
         const searchResults = document.getElementById('searchResults');
 
-        searchInput.addEventListener('input', debounce(function() {
-            if (this.value.length >= 2) {
-                fetchResults(this.value);
-            } else {
-                searchResults.innerHTML = '';
-            }
-        }, 300));
-
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func.apply(this, args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
+        searchForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+            fetchResults(searchInput.value);
+        });
 
         function fetchResults(query) {
             const filters = Array.from(document.querySelectorAll('input[name="filter[]"]:checked'))
                                 .map(input => input.value);
-            
-            fetch(`Controller/search.php?query=${encodeURIComponent(query)}&filters=${filters.join(',')}`)
-                .then(response => response.json())
-                .then(data => {
-                    displayResults(data);
-                })
-                .catch(error => console.error('Error:', error));
+
+            const data = {
+                query: query,
+                filter: filters
+            };
+
+            fetch('Controller/search.php', {
+                method: 'PUT', // Usar PUT
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data) // Convertir el objeto a JSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                displayResults(data);
+            })
+            .catch(error => console.error('Error:', error));
         }
 
         function displayResults(data) {

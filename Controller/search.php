@@ -8,7 +8,7 @@ try {
     $db = $conection; // Asignar la conexión a $db
     
     $query = isset($_GET['query']) ? trim($_GET['query']) : '';
-    $filters = isset($_GET['filters']) ? explode(',', $_GET['filters']) : ['productos', 'restaurantes', 'tipo_comida'];
+    $filters = isset($_GET['filter']) ? $_GET['filter'] : ['productos' ];
     
     if (empty($query)) {
         echo json_encode([]);
