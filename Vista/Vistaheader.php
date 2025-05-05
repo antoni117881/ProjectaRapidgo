@@ -144,13 +144,13 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="?action=Restaurantes">Restaurantes</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="?action=Menus">Menus</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="?action=Ofertas">Ofertas</a>
+                    <a class="nav-link active" aria-current="page" href="?action=Ofertas">Ofertas</a> -->
                 </li>
-                <button onclick="location.href='Vista/ResenaView.php'" class="btn-resena">Reseñas</button>
+                <button onclick="location.href='Vista/ResenaView.php'" class="btn-resena">NuestrasReseñas</button>
         <button onclick="location.href='Vista/CestaView.php'" class="btn-cesta">Cesta</button>
             </ul>
             <div class="usu">

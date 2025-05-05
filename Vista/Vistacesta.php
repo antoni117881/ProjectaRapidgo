@@ -70,10 +70,10 @@ echo getcwd(); // Esto mostrará el directorio de trabajo actual
         <?php foreach ($productos as $producto): ?>
             <li>
                 Producto ID: <?= $producto['producto_id'] ?> - Cantidad: <?= $producto['cantidad'] ?>
-                <a href="/cesta/eliminar/<?= $producto['producto_id'] ?>">Eliminar</a>
+                <a href="cesta.php?eliminar=<?= $producto['producto_id'] ?>">Eliminar</a>
             </li>
         <?php endforeach; ?>
-        <a href="/cesta/vaciar">Vaciar Cesta</a>
+        <a href="cesta.php?vaciar=true">Vaciar Cesta</a>
     <?php endif; ?>
 </ul>
 
