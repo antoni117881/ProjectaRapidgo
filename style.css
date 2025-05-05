@@ -73,6 +73,121 @@ font-size: 25px;
     display: flex; /* Asegura que los elementos dentro se alineen en fila */
 }
 
+/* --- Estilos para la página de la cesta --- */
+.cesta-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 32px 24px 24px 24px;
+}
+.cesta-titulo {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 24px;
+    color: #d35400;
+}
+.cesta-vacia {
+    text-align: center;
+    color: #888;
+    font-size: 1.1rem;
+}
+.cesta-lista {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 24px;
+}
+.cesta-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    padding: 12px 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.cesta-nombre {
+    font-weight: 600;
+    color: #333;
+}
+.cesta-precio {
+    color: #16a085;
+    margin: 0 10px;
+}
+.cesta-cantidad {
+    color: #555;
+    margin-right: 10px;
+}
+.cesta-img {
+    border-radius: 6px;
+    margin: 0 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.btn-eliminar {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 14px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+    margin-left: 10px;
+}
+.btn-eliminar:hover {
+    background: #c0392b;
+}
+.btn-vaciar {
+    display: inline-block;
+    background: #f39c12;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 18px;
+    text-decoration: none;
+    font-size: 1rem;
+    margin: 10px 0 20px 0;
+    transition: background 0.2s;
+}
+.btn-vaciar:hover {
+    background: #d35400;
+}
+.botones-cesta {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 18px;
+}
+.btn-volver, .btn-pagar {
+    flex: 1;
+    background: #16a085;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 0;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.1rem;
+    margin: 0 4px;
+    transition: background 0.2s;
+}
+.btn-volver:hover {
+    background: #138d75;
+}
+.btn-pagar {
+    background: #27ae60;
+}
+.btn-pagar:hover {
+    background: #219150;
+}
+.producto-no-encontrado {
+    color: #e74c3c;
+    font-style: italic;
+    padding: 8px;
+}
+
 
 
 
