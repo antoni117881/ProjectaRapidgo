@@ -24,12 +24,13 @@ class DB {
                 $db_info['db_pass']);
 				
                 // Configura como se manejan los errores de PDO
-				self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);  
+				self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
 				self::$instance->query('SET NAMES utf8');
 				self::$instance->query('SET CHARACTER SET utf8');
 
-			} catch(PDOException $error) {
-				echo $error->getMessage();
+			} catch(PDOException $e) {
+				http_response_code(500);
+				echo json_encode(['error' => 'Error en la búsqueda', 'message' => $e->getMessage()]);
 			}
 
 		}
