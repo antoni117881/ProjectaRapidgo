@@ -145,11 +145,11 @@ $userData = $_SESSION['userData'];
         <div class="profile-header">
             <div class="avatar-circle">
                 <span class="avatar-letter">
-                    <?php echo strtoupper(substr($userData['nombre'] ?? 'U', 0, 1)); ?>
+                    <?php echo strtoupper(substr($_SESSION['nameAccount'] ?? 'U', 0, 1)); ?>
                 </span>
             </div>
             <div>
-                <h1 class="profile-name"><?php echo $userData['nombre'] ?? 'Usuario'; ?></h1>
+                <h1 class="profile-name"><?php echo $_SESSION["nameAccount"]?? 'Usuario'; ?></h1>
                 <span class="profile-label">Perfil</span>
             </div>
         </div>
@@ -168,7 +168,7 @@ $userData = $_SESSION['userData'];
             <li><a href="?action=Codigos"><span>🏷️</span> Códigos promocionales</a></li>
             <li><a href="?action=Idioma"><span>🌐</span> Idioma</a></li>
             <li><a href="?action=FAQ"><span>❓</span> Preguntas frecuentes</a></li>
-            <li><a href="?action=CerrarSesion"><span>🔓</span> Cerrar sesión</a></li>
+            <li><a href="?action=cerrarsesion"><span>🔓</span> Cerrar sesión</a></li>
         </ul>
         <div style="margin-top:30px;">
         <?php

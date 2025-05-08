@@ -35,94 +35,35 @@
         <h2>Iniciar Sesión</h2>
         
         <!-- Mensajes de error o éxito -->
-        <?php if(isset($_GET['error'])): ?>
-            <div class="error-message">
-                <?php echo htmlspecialchars($_GET['error']); ?>
-            </div>
-        <?php endif; ?>
-        
-        <form action="Controller/login.php" method="POST" onsubmit="return validarFormulario()">
-            <div class="form-group">
-                <label for="email">Correo Electrónico:</label>
-                <div class="input-group">
-                    <i class="fas fa-envelope"></i>
-                    <input type="email" id="email" name="email" required 
-                           placeholder="ejemplo@correo.com"
-                           value="<?php echo isset($_COOKIE['remember_email']) ? htmlspecialchars($_COOKIE['remember_email']) : ''; ?>">
+        <div class="container">
+        <div class="container-login">
+            <form action="?action=login2" method="post" class="form-login">
+               
+
+                <label for="nameAccount">Usuario</label>
+                <input type="text" id="nameAccount" name="nameAccount" maxlength="12" required>
+
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" maxlength="12" required>
+                <br>
+
+
+                <input type="submit" value="Iniciar Sesión" class="boton-logear">
+
+                <div class="form-links">
+                    <a href="?action=NewPassword">¿Olvidaste tu contraseña?</a>
+                    <a href="?action=Registro">Crear Cuenta</a>
                 </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="password">Contraseña:</label>
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="password" name="password" required 
-                           placeholder="Ingresa tu contraseña">
-                    <i class="fas fa-eye toggle-password"></i>
-                </div>
-            </div>
-            
-            <div class="form-group">
+                <div class="form-group">
                 <label>
                     <input type="checkbox" name="remember" 
                            <?php echo isset($_COOKIE['remember_email']) ? 'checked' : ''; ?>>
                     Recordar correo
                 </label>
             </div>
-            
-            <button type="submit" class="btn-login">
-                <i class="fas fa-sign-in-alt"></i>
-                Iniciar Sesión
-            </button>
-        </form>
-        
-        
-        
-        <div class="links">
-            <a href="Resource_registro.php">
-                <i class="fas fa-user-plus"></i>
-                ¿No tienes cuenta? Regístrate
-            </a>
-            <a href="forgot-password.php">
-                <i class="fas fa-key"></i>
-                ¿Olvidaste tu contraseña?
-            </a>
+            </form>
         </div>
     </div>
 
-    <script>
-        // Toggle password visibility
-        document.querySelector('.toggle-password').addEventListener('click', function() {
-            const passwordInput = document.querySelector('#password');
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                this.classList.replace('fa-eye', 'fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                this.classList.replace('fa-eye-slash', 'fa-eye');
-            }
-        });
-
-        function validarFormulario() {
-            const email = document.querySelector('#email').value;
-            const password = document.querySelector('#password').value;
-            let isValid = true;
-
-            // Validar email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('Por favor, ingrese un email válido');
-                isValid = false;
-            }
-
-            // Validar contraseña
-            if (password.length < 6) {
-                alert('La contraseña debe tener al menos 6 caracteres');
-                isValid = false;
-            }
-
-            return isValid;
-        }
-    </script>
 </body>
 </html>
