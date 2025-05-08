@@ -37,6 +37,7 @@ if (isset($_POST['add_to_cart'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles del Producto</title>
+    <link rel="stylesheet" href="../style.css">
     <style>
         /* Estilo general */
         body {
@@ -162,9 +163,8 @@ if (isset($_POST['add_to_cart'])) {
     </style>
 </head>
 <body>
-
     <header>
-        <?php include 'Vista/Vistaheader.php'; ?>
+        <?php include 'Vistaheader.php'; ?>
     </header>
 
     <main>
@@ -181,7 +181,7 @@ if (isset($_POST['add_to_cart'])) {
                         <p class="precio">Precio: $<?php echo number_format($producto['PrecioUnidad'], 2); ?></p>
                         
                         <!-- Botón Añadir al Carrito -->
-                        <form method="POST" action="Vista/Vistacesta.php">
+                        <form method="POST" action="Vistacesta.php">
                             <input type="hidden" name="producto_id" value="<?php echo $producto['ID']; ?>">
                             <input type="hidden" name="producto_nombre" value="<?php echo $producto['Nombre']; ?>">
                             <input type="hidden" name="producto_precio" value="<?php echo $producto['PrecioUnidad']; ?>">
@@ -196,6 +196,9 @@ if (isset($_POST['add_to_cart'])) {
         </div>
     </main>
 
+    <footer>
+        <?php include 'Vista/vistafooter.php'; ?>
+    </footer>
 </body>
 </html>
 
