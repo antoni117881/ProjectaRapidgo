@@ -6,31 +6,6 @@
     <title>Buscador</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-<body>
-    <div class="search-container">
-        <form id="searchForm" class="search-form">
-            <div class="search-box">
-                <input type="text" name="query" id="searchInput" 
-                       placeholder="Buscar productos, restaurantes o tipos de comida..."
-                       autocomplete="off">
-                <button type="submit">Buscar</button>
-            </div>
-            
-            <div class="filter-options">
-                <label><input type="checkbox" name="filter[]" value="productos" checked> Productos</label>
-            </div>
-        </form>
-
-        <div id="searchResults" class="search-results">
-            <!-- Los resultados se mostrarán aquí -->
-        </div>
-    </div>
-
-    <div id="modalDetalle" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
-        <div id="modalContenido" style="background:#fff; padding:30px; border-radius:10px; max-width:400px;"></div>
-    </div>
-
     <style>
         .search-container {
             max-width: 800px;
@@ -52,13 +27,18 @@
             font-size: 16px;
         }
 
-        .search-box button {
+        .btn-buscar {
             padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            background-color:rgb(224, 118, 18); /* Color de fondo */
+            color: white; /* Color del texto */
+            border: none; /* Sin borde */
+            border-radius: 5px; /* Bordes redondeados */
+            cursor: pointer; /* Cambia el cursor al pasar el ratón */
+            transition: background-color 0.3s; /* Transición suave para el color de fondo */
+        }
+
+        .btn-buscar:hover {
+            background-color: #0056b3; /* Color de fondo al pasar el ratón */
         }
 
         .filter-options {
@@ -78,6 +58,30 @@
             border-radius: 5px;
         }
     </style>
+</head>
+<body>
+    <div class="search-container">
+        <form id="searchForm" class="search-form">
+            <div class="search-box">
+                <input type="text" name="query" id="searchInput" 
+                       placeholder="Buscar productos, restaurantes o tipos de comida..."
+                       autocomplete="off">
+                <button type="submit" class="btn-buscar">Buscar</button>
+            </div>
+            
+            <div class="filter-options">
+                <label><input type="checkbox" name="filter[]" value="productos" checked> Productos</label>
+            </div>
+        </form>
+
+        <div id="searchResults" class="search-results">
+            <!-- Los resultados se mostrarán aquí -->
+        </div>
+    </div>
+
+    <div id="modalDetalle" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
+        <div id="modalContenido" style="background:#fff; padding:30px; border-radius:10px; max-width:400px;"></div>
+    </div>
 
     <script>
         const searchForm = document.getElementById('searchForm');
@@ -86,7 +90,7 @@
 
         searchForm.addEventListener('submit', function(event) {
             event.preventDefault();
-            fetchResults(searchInput.value);
+            fetchResults(searchInput.value.trim());
         });
 
         function fetchResults(query) {
