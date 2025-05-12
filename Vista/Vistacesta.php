@@ -19,14 +19,14 @@ if (isset($_GET['eliminar'])) {
             break;
         }
     }
-    header("Location: ?action=Cesta");
+    header("Location: Vistacesta.php");
     exit();
 }
 
 // Lógica para vaciar la cesta
 if (isset($_GET['vaciar'])) {
     $_SESSION['cesta'] = [];
-    header("Location: ?action=Cesta");
+    header("Location: Vistacesta.php");
     exit();
 }
 
@@ -40,7 +40,7 @@ if (isset($_POST['producto_id']) && isset($_POST['cantidad'])) {
         'cantidad' => $cantidad
     ];
 
-    header("Location: ?action=Cesta");
+    header("Location: Vistacesta.php");
     exit();
 }
 

@@ -12,22 +12,25 @@ if (isset($_POST['add_to_cart'])) {
     $producto_nombre = $_POST['producto_nombre'];
     $producto_precio = $_POST['producto_precio'];
     $producto_imagen = $_POST['producto_imagen'];
+    $cantidad = isset($_POST['cantidad']) ? intval($_POST['cantidad']) : 1;
 
-    // Inicializa el carrito si no existe
     if (!isset($_SESSION['carrito'])) {
         $_SESSION['carrito'] = [];
     }
 
-    // Añade el producto al carrito
-    $_SESSION['carrito'][$producto_id] = [
-        'nombre' => $producto_nombre,
-        'precio' => $producto_precio,
-        'imagen' => $producto_imagen,
-        'cantidad' => 1 // Puedes ajustar la cantidad según sea necesario
-    ];
+    // Si el producto ya está en el carrito, suma la cantidad
+    if (isset($_SESSION['carrito'][$producto_id])) {
+        $_SESSION['carrito'][$producto_id]['cantidad'] += $cantidad;
+    } else {
+        $_SESSION['carrito'][$producto_id] = [
+            'nombre' => $producto_nombre,
+            'precio' => $producto_precio,
+            'imagen' => $producto_imagen,
+            'cantidad' => $cantidad
+        ];
+    }
 
-    // Redirige a la página del carrito
-    header('Location: Vistacesta.php');
+    header('Location: Vista/VistaCarrito.php');
     exit();
 }
 ?>
@@ -37,6 +40,7 @@ if (isset($_POST['add_to_cart'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles del Producto</title>
+    <link rel="stylesheet" href="../style.css">
     <style>
         /* Estilo general */
         body {
@@ -159,12 +163,92 @@ if (isset($_POST['add_to_cart'])) {
                 margin-top: 20px;
             }
         }
+
+        .descripcion-amplia {
+            background: #f9f9f9;
+            border-left: 4px solid #e53935;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+            font-size: 1.15rem;
+            color: #444;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(229,57,53,0.05);
+        }
+
+        .btn-anadir {
+            background: #e91e63;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 25px;
+            padding: 14px 32px;
+            margin-top: 10px;
+            box-shadow: 0 2px 8px rgba(233,30,99,0.15);
+            transition: background 0.2s;
+        }
+
+        .btn-anadir:hover {
+            background: #ad1457;
+        }
+
+        .badge-producto {
+            display: inline-block;
+            background: #f8bbd0;
+            color: #ad1457;
+            font-weight: 600;
+            border-radius: 20px;
+            padding: 7px 18px;
+            margin-top: 12px;
+            font-size: 1rem;
+            box-shadow: 0 1px 4px rgba(233,30,99,0.10);
+        }
+
+        .cantidad-control {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+
+        .btn-circular {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-circular:disabled {
+            background: #e0e0e0;
+            color: #bdbdbd;
+            cursor: not-allowed;
+        }
+
+        .btn-circular:hover:not(:disabled) {
+            background: #218838;
+        }
+
+        .cantidad-numero {
+            font-size: 1.5rem;
+            font-weight: bold;
+            min-width: 24px;
+            text-align: center;
+            color: #222;
+        }
     </style>
 </head>
 <body>
-
     <header>
-        <?php include 'Vista/Vistaheader.php'; ?>
+        <?php include 'Vistaheader.php'; ?>
     </header>
 
     <main>
@@ -177,17 +261,35 @@ if (isset($_POST['add_to_cart'])) {
                     </div>
                     <div class="producto-info">
                         <h2><?php echo $producto['Nombre']; ?></h2>
-                        <p><?php echo $producto['Descripcion']; ?></p>
+                        <div class="descripcion-amplia">
+                            <?php echo $producto['Descripcion']; ?>
+                        </div>
                         <p class="precio">Precio: $<?php echo number_format($producto['PrecioUnidad'], 2); ?></p>
                         
                         <!-- Botón Añadir al Carrito -->
-                        <form method="POST" action="Vista/Vistacesta.php">
+                        <form id="add-to-cart-form" method="POST" action="Vista/VistaCarrito.php">
                             <input type="hidden" name="producto_id" value="<?php echo $producto['ID']; ?>">
                             <input type="hidden" name="producto_nombre" value="<?php echo $producto['Nombre']; ?>">
-                            <input type="hidden" name="producto_precio" value="<?php echo $producto['PrecioUnidad']; ?>">
+                            <input type="hidden" name="producto_precio" id="producto_precio" value="<?php echo $producto['PrecioUnidad']; ?>">
                             <input type="hidden" name="producto_imagen" value="<?php echo $producto['Imagen']; ?>">
-                            <button type="submit" name="add_to_cart" class="btn btn-primary">Añadir al Carrito</button>
+
+                            <div class="cantidad-control">
+                                <button type="button" id="decrementar" class="btn-circular">−</button>
+                                <span id="cantidad" class="cantidad-numero">1</span>
+                                <input type="hidden" name="cantidad" id="cantidad_input" value="1">
+                                <button type="button" id="incrementar" class="btn-circular">+</button>
+                            </div>
+
+                            <button type="submit" id="btn-add-cart" class="btn-anadir">
+                                Añadir <?php echo $producto['Nombre']; ?> (<?php echo $producto['PrecioUnidad']; ?> $)
+                            </button>
                         </form>
+
+                        <?php if (isset($_SESSION['carrito'][$producto['ID']])): ?>
+                            <span class="badge-producto">
+                                Añadido: <?php echo $_SESSION['carrito'][$producto['ID']]['cantidad']; ?> x <?php echo $producto['Nombre']; ?>
+                            </span>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php else: ?>
@@ -196,6 +298,33 @@ if (isset($_POST['add_to_cart'])) {
         </div>
     </main>
 
+    <footer>
+        <?php include 'Vista/vistafooter.php'; ?>
+    </footer>
+
+    <script>
+        const precioUnidad = parseFloat(document.getElementById('producto_precio').value);
+        let cantidad = 1;
+
+        function actualizarBoton() {
+            let total = precioUnidad * cantidad;
+            document.getElementById('btn-add-cart').textContent = `Añadir ${cantidad} por $${total.toFixed(2)}`;
+            document.getElementById('cantidad').textContent = cantidad;
+            document.getElementById('cantidad_input').value = cantidad;
+        }
+
+        document.getElementById('incrementar').onclick = function() {
+            cantidad++;
+            actualizarBoton();
+        };
+
+        document.getElementById('decrementar').onclick = function() {
+            if (cantidad > 1) {
+                cantidad--;
+                actualizarBoton();
+            }
+        };
+    </script>
 </body>
 </html>
 

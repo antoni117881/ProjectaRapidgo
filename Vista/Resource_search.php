@@ -20,21 +20,19 @@
             </div>
             
             <div class="filter-options">
-                <label>
-                    <input type="checkbox" name="filter[]" value="productos" checked> Productos
-                </label>
-                <label>
-                    <input type="checkbox" name="filter[]" value="restaurantes"> Restaurantes
-                </label>
-                <label>
-                    <input type="checkbox" name="filter[]" value="tipo_comida"> Tipo de Comida
-                </label>
+            <label><input type="checkbox" name="filter[]" value="productos" > Productos</label>
+            <label><input type="checkbox" name="filter[]" value="restaurantes"> Restaurantes</label>
+            <label><input type="checkbox" name="filter[]" value="tipo_comida"> Tipo de Comida</label>
             </div>
         </form>
 
         <div id="searchResults" class="search-results">
             <!-- Los resultados se mostrarán aquí -->
         </div>
+    </div>
+
+    <div id="modalDetalle" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
+        <div id="modalContenido" style="background:#fff; padding:30px; border-radius:10px; max-width:400px;"></div>
     </div>
 
     <style>
@@ -91,7 +89,8 @@
         const searchResults = document.getElementById('searchResults');
 
         searchForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Evitar el envío del formulario por defecto
+            event.preventDefault();
+            console.log('Formulario enviado, pero sin recargar la página');
             fetchResults(searchInput.value);
         });
 
@@ -105,11 +104,11 @@
             };
 
             fetch('Controller/search.php', {
-                method: 'PUT', // Usar PUT
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data) // Convertir el objeto a JSON
+                body: JSON.stringify(data)
             })
             .then(response => response.json())
             .then(data => {
@@ -127,18 +126,43 @@
             }
 
             data.forEach(item => {
-                const resultDiv = document.createElement('div');
-                resultDiv.className = 'result-item';
-                
-                let content = `<h3>${item.nombre}</h3>`;
-                if (item.tipo === 'restaurante') {
-                    content += `<p>Restaurante - ${item.tipo_comida}</p>`;
-                } else if (item.tipo === 'producto') {
-                    content += `<p>Producto - ${item.precio}€</p>`;
+                if (item.tipo === 'producto') {
+                    const card = document.createElement('div');
+                    card.style.background = 'linear-gradient(to bottom, #f9d423, #ff4e50)';
+                    card.style.borderRadius = '20px';
+                    card.style.boxShadow = '0 4px 16px rgba(0,0,0,0.15)';
+                    card.style.padding = '20px';
+                    card.style.margin = '20px 0';
+                    card.style.display = 'flex';
+                    card.style.flexDirection = 'column';
+                    card.style.alignItems = 'center';
+                    card.style.maxWidth = '350px';
+
+                    card.innerHTML = `
+                        <img src="${item.imagen || 'ruta/por/defecto.jpg'}" alt="${item.nombre}" style="width: 90%; max-width: 300px; border-radius: 15px; margin-bottom: 15px;">
+                        <h2 style="margin: 0 0 10px 0;">${item.nombre}</h2>
+                        <p style="margin: 0 0 5px 0;">Categoría: ${item.categoria || '-'}</p>
+                        <p style="font-weight: bold; font-size: 1.2em; margin: 0 0 10px 0;">€${item.precio}</p>
+                        <button onclick="window.location.href='Vista/VistaProductoDetalle.php?id=${item.id}'" style="padding: 10px 20px; background: #fff; color: #c0392b; border: 2px solid #27ae60; border-radius: 20px; font-weight: bold; cursor: pointer;">
+                            Ver detalles del producto
+                        </button>
+                    `;
+                    searchResults.appendChild(card);
+
+                    // Después de agregar la tarjeta al DOM:
+                    card.querySelector('.btn-detalle').addEventListener('click', function() {
+                        document.getElementById('modalContenido').innerHTML = `
+                            <h2>${item.nombre}</h2>
+                            <img src="${item.imagen || 'ruta/por/defecto.jpg'}" style="width:100%;">
+                            <p>Categoría: ${item.categoria || '-'}</p>
+                            <p>Precio: €${item.precio}</p>
+                            <p>${item.descripcion || ''}</p>
+                            <button onclick="document.getElementById('modalDetalle').style.display='none'">Cerrar</button>
+                        `;
+                        document.getElementById('modalDetalle').style.display = 'flex';
+                    });
                 }
-                
-                resultDiv.innerHTML = content;
-                searchResults.appendChild(resultDiv);
+                // Puedes agregar aquí el formato para restaurantes o tipos de comida si lo necesitas
             });
         }
     </script>

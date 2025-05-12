@@ -5,6 +5,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <style>
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+footer {
+    margin-top: auto;
+}
 
 .hero {
     position: relative;
@@ -57,48 +77,52 @@
 }
 </style>
 <body>
-    <header>
-        <?php include 'Vista/Vistaheader.php'; ?>
-        <div class="separador1">
-                    </div>
-    </header>
-    <main>
-
-        <div class="productos">
-            
-                  <section class="hero">
-                  <video class="hero__video" autoplay muted loop>
-                      <source src="video/Food_Video.mp4" type="video/mp4">
-                      Your browser does not support the video tag.
-                  </video>
-                  <div class="hero__content">
-                      
-                     <h1> <p class="hero__subtitle">DESCUBRE LOS MEJORES RESTAURANTES CERCA DE TI  </p></h1>
-                  </div>
-                  
-              </section>
-              
-              <div class="separador">
-                    </div>
-                    <div class="separador2">
-                    </div>
-                    <div class="separador3">
-                    </div>
-              <?php
-                // Incluir la vista de los restaurantes 
+    <div class="main-content">
+        <header>
+            <?php include 'Vista/Vistaheader.php'; ?>
+            <div class="separador1">
+                        </div>
+        </header>
+        <main>
+            <div class="productos">
                 
-                include 'Vista/Resource_search.php';
+                      <section class="hero">
+                      <video class="hero__video" autoplay muted loop>
+                          <source src="video/Food_Video.mp4" type="video/mp4">
+                          Your browser does not support the video tag.
+                      </video>
+                      <div class="hero__content">
+                          
+                         <h1> <p class="hero__subtitle">DESCUBRE LOS MEJORES RESTAURANTES CERCA DE TI  </p></h1>
+                      </div>
+                      
+                  </section>
+                  
+                  <div class="separador">
+                        </div>
+                        <div class="separador2">
+                        </div>
+                        <div class="separador3">
+                        </div>
+                  <?php
+                    // Incluir la vista de los restaurantes 
+                    
+                    include 'Vista/Resource_search.php';
 
-                 
-            ?>
-            
-        </div>
-        <div>
-            <?php
-            include 'Vista/filtro_productos.php';
-            ?>
-        </div>
-    </main>
+                     
+                ?>
+                
+            </div>
+            <div>
+                <?php
+                include 'Vista/filtro_productos.php';
+                ?>
+            </div>
+        </main>
+    </div>
+    <footer>
+        <?php include 'Vista/vistafooter.php'; ?>
+    </footer>
 </body>
 <script src="main1.js"></script>
 </html>

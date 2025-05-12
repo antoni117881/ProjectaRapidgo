@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html LANG?="en">
 <head>
@@ -218,11 +217,8 @@
         </div>
     </div>
     <!-- Footer -->
-<footer class="footer">
-    <div class="footer__content">
-        <p>&copy; 2025 RapidGo. All rights reserved.</p>
-    </div>
-    
+<footer>
+    <?php include 'Vista/vistafooter.php'; ?>
 </footer>
 
     <script src="main1.js"></script>
