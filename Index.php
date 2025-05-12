@@ -51,6 +51,9 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
         case 'login3':
             include __DIR__.'/loginvosta.php';
             break;
+    case 'reseñarestaurante':
+        include __DIR__.'/Controlador/reseñas.php';
+        break;
 
     case 'home':
             include __DIR__.'/indexhome.html';
