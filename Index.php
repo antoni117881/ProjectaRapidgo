@@ -6,8 +6,8 @@ $action = $_GET['action'] ?? null; //es mas robusta ?? si es null
 
 switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
    
-    case 'Login':
-        include __DIR__.'/Resource_login.php';
+    case 'carrito':
+        include __DIR__.'/Controlador/cestacontrolador.php';
         break;
     case 'registro':
         include __DIR__.'/Resource_registro.php';

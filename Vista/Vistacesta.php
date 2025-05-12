@@ -1,108 +1,150 @@
-<?php   
-require_once __DIR__ . '/../Controlador/cestacontrolador.php';
-include __DIR__ . '/Vistaheader.php';
+<?php
+// Asumimos que Cesta.php está en una ruta accesible, por ejemplo, ../model/Cesta.php
+// Ajusta la ruta según tu estructura de directorios.
+require_once __DIR__ . '/../Modelo/cestamodelo.php'; // O la ruta correcta
 
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+// Obtener los productos del carrito
+$cartItems = getCartItems(); // Esta es la nueva función
 
-if (!isset($_SESSION['cesta'])) {
-    $_SESSION['cesta'] = [];
-}
-
-// Lógica para eliminar productos
-if (isset($_GET['eliminar'])) {
-    $productoId = $_GET['eliminar'];
-    foreach ($_SESSION['cesta'] as $key => $producto) {
-        if ($producto['producto_id'] == $productoId) {
-            unset($_SESSION['cesta'][$key]);
-            break;
-        }
-    }
-    header("Location: Vistacesta.php");
-    exit();
-}
-
-// Lógica para vaciar la cesta
-if (isset($_GET['vaciar'])) {
-    $_SESSION['cesta'] = [];
-    header("Location: Vistacesta.php");
-    exit();
-}
-
-// Lógica para añadir productos
-if (isset($_POST['producto_id']) && isset($_POST['cantidad'])) {
-    $productoId = $_POST['producto_id'];
-    $cantidad = $_POST['cantidad'];
-
-    $_SESSION['cesta'][] = [
-        'producto_id' => $productoId,
-        'cantidad' => $cantidad
-    ];
-
-    header("Location: Vistacesta.php");
-    exit();
-}
-
-$productos = $_SESSION['cesta'];
-
-// Supón que tienes una función para obtener un producto por su ID
-function obtenerProductoPorId($id) {
-    $conn = new mysqli('localhost', 'root', '', 'rapidgobdd');
-    if ($conn->connect_error) {
-        die("Error de conexión: " . $conn->connect_error);
-    }
-    $stmt = $conn->prepare("SELECT * FROM productos WHERE id = ?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
-    $producto = $resultado->fetch_assoc();
-    $conn->close();
-    return $producto;
+// Si se recibe una acción de eliminar (para procesar antes de mostrar)
+// Esto es un ejemplo simplificado. Idealmente, esto se manejaría en un controlador
+// o a través de una petición AJAX como la de añadir.
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'remove' && isset($_POST['product_id'])) {
+    removeFromCart($_POST['product_id']);
+    // Redirigir para evitar reenvío del formulario al recargar
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit;
 }
 ?>
-
 <!DOCTYPE html>
-<html lang="es">
+<html>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f6fa;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+    }
+
+    #cart-list {
+        list-style: none;
+        padding: 0;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    #cart-list li {
+        background-color: #ffffff;
+        padding: 15px 20px;
+        margin-bottom: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .btn-Agregar {
+        background-color: #e74c3c;
+        color: #fff;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .btn-Agregar:hover {
+        background-color: #c0392b;
+    }
+
+    p {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 16px;
+    }
+
+    a {
+        color: #2980b9;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cesta de la Compra</title>
-    <link rel="stylesheet" href="../Estilos/style.css">
+    <title>Cesta de Compras</title>
+    <script>
+    // La función removeProduct de JavaScript debería hacer una llamada AJAX
+    // similar a addToCart para una mejor UX, en lugar de un envío de formulario.
+    // Pero si se mantiene el envío de formulario, el PHP de arriba lo manejaría.
+    // Por ahora, voy a modificar el botón para que envíe un formulario POST simple.
+    function submitRemoveForm(productId) {
+        const form = document.getElementById('remove-form-' + productId);
+        if (form) {
+            form.submit();
+        }
+    }
+    </script>
 </head>
+<header>
+<?php include __DIR__ . "/../Vista/Vistaheader.php"; ?>
+</header>
 <body>
-    <main class="cesta-container">
-        <h2 class="cesta-titulo">Tu Cesta</h2>
-
-        <?php if (empty($productos)): ?>
-            <p class="cesta-vacia">No tienes productos en tu cesta.</p>
+    <?php
+    // Asumo que header.php existe en el mismo directorio que esta vista
+    // o ajusta la ruta.
+    // include __DIR__. "/header.php";
+    echo "<!-- Incluyendo header (simulado) -->";
+    ?>
+    <h1>Cesta de Compras</h1>
+    <ul id="cart-list">
+        <?php if (!empty($cartItems)): ?>
+            <?php foreach ($cartItems as $productId): ?>
+                <li id="product-<?= htmlspecialchars($productId) ?>">
+                    Producto ID: <?= htmlspecialchars($productId) ?>
+                    
+                    <!-- Formulario para eliminar (POST para evitar problemas con GET y re-ejecución) -->
+                    <button onclick="removeFromCart(<?php echo $productId; ?>)" class="btn-Agregar">borrar producto</button>
+                    
+                </li>
+            <?php endforeach; ?>
         <?php else: ?>
-            <ul class="cesta-lista">
-                <?php foreach ($productos as $producto): 
-                    $infoProducto = obtenerProductoPorId($producto['producto_id']);
-                    if (!$infoProducto) {
-                        echo "<li class='producto-no-encontrado'>Producto no encontrado (ID: " . htmlspecialchars($producto['producto_id']) . ")</li>";
-                        continue;
-                    }
-                ?>
-                    <li class="cesta-item">
-                        <span class="cesta-nombre"><?= htmlspecialchars($infoProducto['Nombre'] ?? 'Producto sin nombre') ?></span> - 
-                        <span class="cesta-precio"><?= htmlspecialchars($infoProducto['PrecioUnidad'] ?? '0.00') ?> €</span> - 
-                        <span class="cesta-cantidad">Cantidad: <?= htmlspecialchars($producto['cantidad']) ?></span>
-                        <?php if (!empty($infoProducto['imagen'])): ?>
-                            <img class="cesta-img" src="<?= htmlspecialchars($infoProducto['imagen']) ?>" alt="Imagen del producto" width="50">
-                        <?php endif; ?>
-                        <a href="Vistacesta.php?eliminar=<?= htmlspecialchars($producto['producto_id']) ?>" class="btn-eliminar">Eliminar</a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-            <a href="Vistacesta.php?vaciar=true" class="btn-vaciar">Vaciar Cesta</a>
+            <li>La cesta está vacía.</li>
         <?php endif; ?>
+    </ul>
 
-        <div class="botones-cesta">
-            <a href="Vistacatalogo.php" class="btn-volver">Volver al catálogo</a>
-            <a href="pago.php" class="btn-pagar">Pagar</a>
-        </div>
-    </main>
+    <p><a href="index.php">Seguir comprando</a></p> <!-- Ejemplo de enlace para volver a la tienda -->
+
+    <script>
+function removeFromCart(productId) {    
+    $.ajax({
+        type: "POST",
+        url: "?action=borrarcarrito",
+        data: { "id_producto": productId },
+        success: function(data) {
+            console.log(data); // Asegúrate de que la respuesta se esté mostrando en la consola
+            location.reload();
+
+        },
+        error: function(xhr) {
+            alert('Error en la solicitud: ' + xhr.status);
+        }
+    });
+}
+</script>
+<script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
 </body>
 </html>

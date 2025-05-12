@@ -188,21 +188,14 @@ require_once 'Controlador/productos_controller.php';
                             <button type="submit" class="btn btn-primary">
                                 Ver detalles del producto
                             </button>
-                        </form>
+                            
 
-                        <form action="?action=agregarCesta" method="POST">
-                            <input type="hidden" name="idProducto" value="<?php echo $producto['ID']; ?>">
-                            <input type="number" 
-                                   name="cantidad" 
-                                   value="1" 
-                                   min="1" 
-                                   max="10" 
-                                   class="cantidad-input">
-                            <button type="submit" class="btn btn-success">
-                                Añadir a la cesta
-                            </button>
+                        </form>
                         </form>
                     </div>
+                    <div>
+                    <button onclick="addToCart(<?php echo $producto['ID']; ?>)" class="btn-Agregar">Agregar a la Cesta</button>
+            </div>
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
@@ -210,3 +203,22 @@ require_once 'Controlador/productos_controller.php';
         <?php endif; ?>
     </div>
 </main>
+<script>
+function addToCart(productId) {
+    $.ajax({
+        type: "POST",
+        url: "?action=carrito",
+        data: { "id_producto": productId },
+        success: function(data) {
+            console.log(data); // Asegúrate de que la respuesta se esté mostrando en la consola
+        },
+        error: function(xhr) {
+            alert('Error en la solicitud: ' + xhr.status);
+        }
+    });
+}
+</script>
+<script
+  src="https://code.jquery.com/jquery-3.7.1.js"
+  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+  crossorigin="anonymous"></script>
