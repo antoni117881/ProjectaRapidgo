@@ -2,6 +2,15 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+// Verifica si el usuario está autenticado
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php"); // Redirigir a la página de inicio de sesión si no está autenticado
+    exit();
+}
+
+$userData = $_SESSION['user']; // Obtener los datos del usuario de la sesión
+
 // Inicializar datos de usuario si no existen
 if (!isset($_SESSION['userData'])) {
     $_SESSION['userData'] = [
@@ -50,8 +59,6 @@ if (!isset($_SESSION['pedidos'])) {
         ]
     ];
 }
-
-$userData = $_SESSION['userData'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -318,11 +325,11 @@ $userData = $_SESSION['userData'];
         <div class="profile-header">
             <div class="avatar-circle">
                 <span class="avatar-letter">
-                    <?php echo strtoupper(substr($_SESSION['userData']['nombre'] ?? 'U', 0, 1)); ?>
+                    <?php echo strtoupper(substr($userData['nombre'], 0, 1)); ?>
                 </span>
             </div>
             <div>
-                <h1 class="profile-name"><?php echo $_SESSION['userData']['nombre'] ?? 'Usuario'; ?></h1>
+                <h1 class="profile-name"><?php echo htmlspecialchars($userData['nombre']); ?></h1>
                 <span class="profile-label">Perfil</span>
             </div>
         </div>
@@ -586,4 +593,7 @@ $userData = $_SESSION['userData'];
         const allContents = document.getElementsByClassName('accordion-content');
         const allHeaders = document.getElementsByClassName('accordion-header');
         
-        for (let i =
+    }
+    </script>
+</body>
+</html>

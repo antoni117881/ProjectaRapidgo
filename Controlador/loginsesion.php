@@ -15,15 +15,15 @@
     );
 
     if($conection_ok) {
-        $_SESSION["nameAccount"] = $_POST["nameAccount"];
-        
-        
-       $sesion_ok = true;
-       $_SESSION["SesionStart"] = true;
+        $_SESSION["user"] = [
+            'nombre' => $_POST["nameAccount"],
+            'email' => $_POST["email"],
+        ];
+        $_SESSION["SesionStart"] = true;
 
-       // Redirigir a Resource_usuario.php con el parámetro de acción
-       header("Location: /ProjectaRapidgo/?action=Usuario");
-       exit(); // Asegúrate de salir después de redirigir
+        // Redirigir a Resource_usuario.php con el parámetro de acción
+        header("Location: /ProjectaRapidgo/?action=Usuario");
+        exit(); // Asegúrate de salir después de redirigir
     }else {
         echo $conection_ok;
         $error = "Usuari o contrasenya incorrectes";
