@@ -20,15 +20,9 @@
             </div>
             
             <div class="filter-options">
-                <label>
-                    <input type="checkbox" name="filter[]" value="productos" checked> Productos
-                </label>
-                <label>
-                    <input type="checkbox" name="filter[]" value="restaurantes"> Restaurantes
-                </label>
-                <label>
-                    <input type="checkbox" name="filter[]" value="tipo_comida"> Tipo de Comida
-                </label>
+            <label><input type="checkbox" name="filter[]" value="productos" > Productos</label>
+            <label><input type="checkbox" name="filter[]" value="restaurantes"> Restaurantes</label>
+            <label><input type="checkbox" name="filter[]" value="tipo_comida"> Tipo de Comida</label>
             </div>
         </form>
 
