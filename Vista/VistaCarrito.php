@@ -1,182 +1,66 @@
+<?php
+include '../Modelo/BDDConection.php'; // Ajusta la ruta si es necesario
+session_start();
+if (!isset($_SESSION['usuario_id'])) {
+    die("Debes iniciar sesión primero.");
+}
+$usuario_id = $_SESSION['usuario_id']; // Asegúrate de tener el id del usuario en sesión
+
+// Consulta para obtener los productos del carrito
+$sql = "SELECT c.id, p.nombre, c.cantidad, p.imagen 
+        FROM carrito c
+        JOIN productos p ON c.producto_id = p.id
+        WHERE c.usuario_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $usuario_id);
+$stmt->execute();
+$result = $stmt->get_result();
+?>
+
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito de Compras</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #f7f7f7;
-        }
-        .productos {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 40px;
-        }
-        .producto {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            padding: 20px;
-            width: 220px;
-            text-align: center;
-        }
-        .producto button {
-            background: #00c48c;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-        .carrito-sidebar {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 350px;
-            height: 100%;
-            background: #fff;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.15);
-            transition: right 0.3s;
-            z-index: 1000;
-            padding: 30px 20px 20px 20px;
-            display: flex;
-            flex-direction: column;
-        }
-        .carrito-sidebar.abierto {
-            right: 0;
-        }
-        .carrito-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .carrito-header h2 {
-            margin: 0;
-        }
-        .cerrar-carrito {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        .carrito-productos {
-            flex: 1;
-            overflow-y: auto;
-        }
-        .carrito-producto {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        .carrito-producto span {
-            font-size: 16px;
-        }
-        .carrito-total {
-            font-weight: bold;
-            font-size: 18px;
-            margin-top: 20px;
-            text-align: right;
-        }
-        .carrito-vacio {
-            text-align: center;
-            color: #888;
-            margin-top: 40px;
-        }
+        img { width: 80px; }
+        table { width: 80%; margin: auto; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
+        button { padding: 5px 10px; }
     </style>
 </head>
-
-
-    <div id="carritoSidebar" class="carrito-sidebar">
-        <div class="carrito-header">
-            <h2>Tu pedido</h2>
-            <button class="cerrar-carrito" onclick="cerrarCarrito()">&times;</button>
-        </div>
-        <div class="carrito-productos" id="carritoProductos">
-            <div class="carrito-vacio" id="carritoVacio">El carrito está vacío.</div>
-        </div>
-        <div class="carrito-total" id="carritoTotal">Total: 0,00 €</div>
-    </div>
-
-    <script>
-        
-function agregarAlCarrito(nombre, precio, imagen) {
-    const formData = new FormData();
-    formData.append("agregar", true);
-    formData.append("nombre", nombre);
-    formData.append("precio", precio);
-    formData.append("imagen", imagen);
-
-    fetch("controladorcarrito.php", {
-        method: "POST",
-        body: formData,
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.success) {
-            mostrarCarritoEmergente(data.carrito);
-        } else {
-            alert(data.message);
-        }
-    });
-}
-
-function eliminarProducto(nombre) {
-    const formData = new FormData();
-    formData.append("eliminar", true);
-    formData.append("nombre", nombre);
-
-    fetch("controladorcarrito.php", {
-        method: "POST",
-        body: formData,
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.success) {
-            mostrarCarritoEmergente(data.carrito);
-        } else {
-            alert("No se pudo eliminar el producto.");
-        }
-    });
-}
-
-function mostrarCarritoEmergente(carrito) {
-    let total = 0;
-
-    let html = '<div id="carrito-popup" style="position:fixed; top:10px; right:10px; width:320px; background:#fff; border:1px solid #ccc; padding:15px; box-shadow:0 0 10px rgba(0,0,0,0.2); z-index:1000;">';
-    html += '<h3>🛒 Mis pedidos</h3><ul style="list-style:none; padding:0;">';
-
-    carrito.forEach(item => {
-        const subtotal = item.price * item.quantity;
-        total += subtotal;
-
-        html += `<li style="margin-bottom:10px; border-bottom:1px solid #eee; padding-bottom:8px;">
-            <img src="${item.image}" style="width:40px; height:40px; vertical-align:middle;"> 
-            <strong>${item.name}</strong> x${item.quantity}<br>
-            $${subtotal.toFixed(2)}
-            <button onclick="eliminarProducto('${item.name}')" style="margin-top:5px; background:#e74c3c; color:white; border:none; padding:3px 6px; cursor:pointer;">Eliminar</button>
-        </li>`;
-    });
-
-    html += `</ul><hr><strong>Total: $${total.toFixed(2)}</strong><br><br>`;
-    html += '<button onclick="document.getElementById(\'carrito-popup\').remove()" style="background:#555; color:white; padding:5px 10px;">Cerrar</button>';
-    html += '</div>';
-
-    const existente = document.getElementById("carrito-popup");
-    if (existente) {
-        existente.remove();
-    }
-
-    document.body.insertAdjacentHTML("beforeend", html);
-}
-</script>
+<body>
+    <h2>Mi Carrito</h2>
+    <table>
+        <tr>
+            <th>Imagen</th>
+            <th>Nombre del Producto</th>
+            <th>Cantidad</th>
+            <th>Aumentar</th>
+            <th>Acciones</th>
+        </tr>
+        <?php while($row = $result->fetch_assoc()): ?>
+        <tr>
+            <td><img src="<?php echo $row['imagen']; ?>" alt="Imagen"></td>
+            <td><?php echo $row['nombre']; ?></td>
+            <td><?php echo $row['cantidad']; ?></td>
+            <td>
+                <form action="aumentar_cantidad.php" method="POST" style="display:inline;">
+                    <input type="hidden" name="carrito_id" value="<?php echo $row['id']; ?>">
+                    <button type="submit">+</button>
+                </form>
+            </td>
+            <td>
+                <form action="eliminar_producto.php" method="POST" style="display:inline;">
+                    <input type="hidden" name="carrito_id" value="<?php echo $row['id']; ?>">
+                    <button type="submit">Eliminar</button>
+                </form>
+                <form action="comprar_producto.php" method="POST" style="display:inline;">
+                    <input type="hidden" name="carrito_id" value="<?php echo $row['id']; ?>">
+                    <button type="submit">Comprar</button>
+                </form>
+            </td>
+        </tr>
+        <?php endwhile; ?>
+    </table>
 </body>
 </html>

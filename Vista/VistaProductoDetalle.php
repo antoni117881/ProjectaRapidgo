@@ -267,7 +267,7 @@ if (isset($_POST['add_to_cart'])) {
                         <p class="precio">Precio: $<?php echo number_format($producto['PrecioUnidad'], 2); ?></p>
                         
                         <!-- Botón Añadir al Carrito -->
-                        <form id="add-to-cart-form" method="POST" action="Vista/VistaCarrito.php">
+                        <form id="add-to-cart-form" method="POST" action="/ProjectaRapidgo/Vista/VistaCarrito.php">
                             <input type="hidden" name="producto_id" value="<?php echo $producto['ID']; ?>">
                             <input type="hidden" name="producto_nombre" value="<?php echo $producto['Nombre']; ?>">
                             <input type="hidden" name="producto_precio" id="producto_precio" value="<?php echo $producto['PrecioUnidad']; ?>">
@@ -303,28 +303,93 @@ if (isset($_POST['add_to_cart'])) {
     </footer>
 
     <script>
-        const precioUnidad = parseFloat(document.getElementById('producto_precio').value);
+        const btnIncrementar = document.getElementById('incrementar');
+        const btnDecrementar = document.getElementById('decrementar');
+        const cantidadSpan = document.getElementById('cantidad');
+        const cantidadInput = document.getElementById('cantidad_input');
+        const btnAddCart = document.getElementById('btn-add-cart');
+        const precioUnitario = <?php echo $producto['PrecioUnidad']; ?>;
+        const nombreProducto = "<?php echo addslashes($producto['Nombre']); ?>";
+
         let cantidad = 1;
 
         function actualizarBoton() {
-            let total = precioUnidad * cantidad;
-            document.getElementById('btn-add-cart').textContent = `Añadir ${cantidad} por $${total.toFixed(2)}`;
-            document.getElementById('cantidad').textContent = cantidad;
-            document.getElementById('cantidad_input').value = cantidad;
+            const total = (precioUnitario * cantidad).toFixed(2);
+            btnAddCart.textContent = `Añadir ${nombreProducto} (${total} $)`;
         }
 
-        document.getElementById('incrementar').onclick = function() {
+        btnIncrementar.onclick = function() {
             cantidad++;
+            cantidadSpan.textContent = cantidad;
+            cantidadInput.value = cantidad;
             actualizarBoton();
         };
 
-        document.getElementById('decrementar').onclick = function() {
+        btnDecrementar.onclick = function() {
             if (cantidad > 1) {
                 cantidad--;
+                cantidadSpan.textContent = cantidad;
+                cantidadInput.value = cantidad;
                 actualizarBoton();
             }
         };
+
+        // Llama una vez al cargar la página
+        actualizarBoton();
+
+        function cambiarCantidad(delta) {
+            var input = document.getElementById('cantidad');
+            var valor = parseInt(input.value);
+            var min = parseInt(input.min);
+            var max = parseInt(input.max);
+            valor += delta;
+            if (valor < min) valor = min;
+            if (valor > max) valor = max;
+            input.value = valor;
+        }
+
+        function agregarAlCarrito() {
+            // Obtén los datos del producto desde los inputs ocultos
+            var nombre = document.querySelector('input[name="nombre"]').value;
+            var precio = document.querySelector('input[name="precio"]').value;
+            var imagen = document.querySelector('input[name="imagen"]').value;
+
+            // Envía los datos por AJAX
+            fetch('/ProjectaRapidgo/Controlador/cestacontrolador.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({
+                    'agregar': 1,
+                    'nombre': nombre,
+                    'precio': precio,
+                    'imagen': imagen
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    mostrarModalCarrito();
+                } else {
+                    alert('Error al agregar el producto');
+                }
+            });
+        }
+
+        function mostrarModalCarrito() {
+            // Carga el contenido del carrito por AJAX
+            fetch('/ProjectaRapidgo/Vista/Vistacarrito.php')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('contenidoCarrito').innerHTML = html;
+                    document.getElementById('modalCarrito').style.display = 'flex';
+                });
+        }
+
+        function cerrarModalCarrito() {
+            document.getElementById('modalCarrito').style.display = 'none';
+        }
     </script>
+    <?php include 'footer.php'; ?>
 </body>
 </html>
 
