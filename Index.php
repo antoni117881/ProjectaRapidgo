@@ -40,21 +40,26 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
         include __DIR__.'/Controlador/PagoController.php';
         break;
     case 'Cesta':
-        include __DIR__.'./Vista/Vistacesta.php';
-        break;
-    case 'loginusu':
-        include __DIR__.'/Controller/login.php';
+        include __DIR__.'Vista/Vistacesta.php';
+    case 'cerrarsesion':
+        include __DIR__.'/Controlador/cerrarSesion.php';
         break;
 
     case 'Restaurantes':
         include __DIR__.'./Vista/VistaRestaurantessolo.php';
         break; 
+        case 'login3':
+            include __DIR__.'/loginvosta.php';
+            break;
+    case 'reseñarestaurante':
+        include __DIR__.'/Controlador/reseñas.php';
+        break;
 
     case 'home':
             include __DIR__.'/indexhome.html';
         break;
     case 'login2':
-        include __DIR__.'/Controller/login.php';
+        include __DIR__.'/Controlador/loginsesion.php';
         break;
         
     default:
