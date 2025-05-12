@@ -14,15 +14,11 @@
                 <input type="text" name="query" id="searchInput" 
                        placeholder="Buscar productos, restaurantes o tipos de comida..."
                        autocomplete="off">
-                <button type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
+                <button type="submit">Buscar</button>
             </div>
             
             <div class="filter-options">
-            <label><input type="checkbox" name="filter[]" value="productos" > Productos</label>
-            <label><input type="checkbox" name="filter[]" value="restaurantes"> Restaurantes</label>
-            <label><input type="checkbox" name="filter[]" value="tipo_comida"> Tipo de Comida</label>
+                <label><input type="checkbox" name="filter[]" value="productos" checked> Productos</label>
             </div>
         </form>
 
@@ -90,7 +86,6 @@
 
         searchForm.addEventListener('submit', function(event) {
             event.preventDefault();
-            console.log('Formulario enviado, pero sin recargar la página');
             fetchResults(searchInput.value);
         });
 

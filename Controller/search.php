@@ -23,6 +23,7 @@ $filters = $input['filter'] ?? [];
 // Prepara la consulta según los filtros
 $results = [];
 
+// Solo procesar el filtro de productos
 if (in_array('productos', $filters)) {
     $sql = "SELECT Nombre, PrecioUnidad, Descripcion, Imagen FROM productos WHERE Nombre LIKE ?";
     $stmt = $conn->prepare($sql);
@@ -37,38 +38,6 @@ if (in_array('productos', $filters)) {
             'precio' => $row['PrecioUnidad'],
             'descripcion' => $row['Descripcion'],
             'imagen' => $row['Imagen']
-        ];
-    }
-}
-
-if (in_array('restaurantes', $filters)) {
-    $sql = "SELECT Nombre, tipo_comida FROM restaurantes WHERE Nombre LIKE ?";
-    $stmt = $conn->prepare($sql);
-    $like = "%$query%";
-    $stmt->bind_param('s', $like);
-    $stmt->execute();
-    $res = $stmt->get_result();
-    while ($row = $res->fetch_assoc()) {
-        $results[] = [
-            'nombre' => $row['Nombre'],
-            'tipo' => 'restaurante',
-            'tipo_comida' => $row['tipo_comida']
-        ];
-    }
-}
-
-if (in_array('tipo_comida', $filters)) {
-    $sql = "SELECT Nombre, tipo_comida FROM restaurantes WHERE tipo_comida LIKE ?";
-    $stmt = $conn->prepare($sql);
-    $like = "%$query%";
-    $stmt->bind_param('s', $like);
-    $stmt->execute();
-    $res = $stmt->get_result();
-    while ($row = $res->fetch_assoc()) {
-        $results[] = [
-            'nombre' => $row['Nombre'],
-            'tipo' => 'restaurante',
-            'tipo_comida' => $row['tipo_comida']
         ];
     }
 }
