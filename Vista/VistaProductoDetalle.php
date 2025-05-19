@@ -267,7 +267,7 @@ if (isset($_POST['add_to_cart'])) {
                         <p class="precio">Precio: $<?php echo number_format($producto['PrecioUnidad'], 2); ?></p>
                         
                         <!-- Botón Añadir al Carrito -->
-                        <form id="add-to-cart-form" method="POST" action="/ProjectaRapidgo/Vista/VistaCarrito.php">
+                        <form id="add-to-cart-form" method="POST" action="/PROJECTARAPIDGO/Vista/VistaCarrito.php">
                             <input type="hidden" name="producto_id" value="<?php echo $producto['ID']; ?>">
                             <input type="hidden" name="producto_nombre" value="<?php echo $producto['Nombre']; ?>">
                             <input type="hidden" name="producto_precio" id="producto_precio" value="<?php echo $producto['PrecioUnidad']; ?>">
@@ -355,7 +355,7 @@ if (isset($_POST['add_to_cart'])) {
             var imagen = document.querySelector('input[name="imagen"]').value;
 
             // Envía los datos por AJAX
-            fetch('/ProjectaRapidgo/Controlador/cestacontrolador.php', {
+            fetch('/PROJECTARAPIDGO/Controlador/ControladorCarrito.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: new URLSearchParams({
@@ -377,7 +377,7 @@ if (isset($_POST['add_to_cart'])) {
 
         function mostrarModalCarrito() {
             // Carga el contenido del carrito por AJAX
-            fetch('/ProjectaRapidgo/Vista/Vistacarrito.php')
+            fetch('/PROJECTARAPIDGO/Vista/VistaCarrito.php')
                 .then(response => response.text())
                 .then(html => {
                     document.getElementById('contenidoCarrito').innerHTML = html;
