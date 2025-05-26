@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <style>
         .search-container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
+            width: 100vw;
+            max-width: 100vw;
+            margin: 0;
+            padding: 0;
         }
 
         .search-box {
@@ -57,22 +58,61 @@
             margin-bottom: 10px;
             border-radius: 5px;
         }
+
+        .search-bar-container {
+            width: 100vw;
+            max-width: 100vw;
+            margin: 0;
+            padding: 30px 0 20px 0;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(145deg,rgb(255, 183, 0),rgb(228, 68, 4));
+            border-radius: 40px;
+            padding: 0 20px;
+            height: 60px;
+            box-shadow: 0 2px 8px rgba(216, 168, 77, 0.73);
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            outline: none;
+            color:rgb(43, 33, 33);
+            font-size: 2rem;
+            flex: 1;
+            padding: 18px 10px;
+        }
+
+        .search-icon {
+            color:rgb(43, 105, 32);
+            font-size: 2rem;
+            margin-right: 10px;
+        }
+
+        .btn-buscar {
+            display: none; /* Oculta el botón si solo quieres la barra tipo buscador */
+        }
     </style>
 </head>
 <body>
     <div class="search-container">
-        <form id="searchForm" class="search-form">
-            <div class="search-box">
-                <input type="text" name="query" id="searchInput" 
-                       placeholder="Buscar productos, restaurantes o tipos de comida..."
-                       autocomplete="off">
+        <div class="search-bar-container">
+            <form id="searchForm" class="search-form">
+                <div class="search-bar">
+                    <span class="search-icon"><i class="fas fa-search"></i></span>
+                    <input type="text" name="query" id="searchInput" placeholder="Buscar productos, restaurantes o tipos de comida..." autocomplete="off">
+                </div>
                 <button type="submit" class="btn-buscar">Buscar</button>
-            </div>
-            
-            <div class="filter-options">
-                <label><input type="checkbox" name="filter[]" value="productos" checked> Productos</label>
-            </div>
-        </form>
+            </form>
+        </div>
+
+        <div class="filter-options">
+            <label><input type="checkbox" name="filter[]" value="productos" checked> Productos</label>
+        </div>
 
         <div id="searchResults" class="search-results">
             <!-- Los resultados se mostrarán aquí -->

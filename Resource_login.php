@@ -13,7 +13,16 @@
             margin: 0;
             padding: 20px;
         }
-
+        .main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
         .login-container {
             max-width: 400px;
             margin: 50px auto;
@@ -143,11 +152,14 @@
         }
     </style>
 </head>
+
+<body>
+    <div class="main-content">
 <header>
 <?php include 'Vista/Vistaheader.php'; ?>
 </header>
-<body>
     <div class="login-container">
+        
         <div class="logo-container">
             <img src="assets/images/logo.png" alt="Logo de la empresa" class="logo">
         </div>
@@ -184,6 +196,6 @@
             </form>
         </div>
     </div>
-
+</div>
 </body>
 </html>
