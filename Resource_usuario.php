@@ -5,11 +5,21 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Verifica si el usuario está autenticado
 if (!isset($_SESSION['user'])) {
-    header("Location: login.php"); // Redirigir a la página de inicio de sesión si no está autenticado
+    header("Location: login.php");
     exit();
 }
 
-$userData = $_SESSION['user']; // Obtener los datos del usuario de la sesión
+// Obtener el email del usuario desde la sesión
+$email = $_SESSION['user']['email'];
+
+// Obtener los datos del usuario desde la base de datos
+$userData = getUserByEmail($email); // Asegúrate de tener esta función en tu modelo
+
+if (!isset($userData)) {
+    // Manejo de error si no hay datos
+    echo "No se encontraron datos del usuario.";
+    exit();
+}
 
 // Inicializar datos de usuario si no existen
 if (!isset($_SESSION['userData'])) {
