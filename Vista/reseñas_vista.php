@@ -67,6 +67,40 @@
             color: #888;
             font-size: 0.95em;
         }
+        .input-resena {
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 30px;
+            background: #f7e7b5;
+            font-size: 1.2em;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(216, 168, 77, 0.15);
+            outline: none;
+            transition: box-shadow 0.2s;
+        }
+        .input-resena:focus {
+            box-shadow: 0 4px 16px rgba(216, 168, 77, 0.25);
+            background: #fffbe6;
+        }
+        .btn-resena {
+            width: 100%;
+            padding: 15px 0;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #ffb347, #ffcc33);
+            color: #a94400;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(216, 168, 77, 0.15);
+            transition: background 0.3s, color 0.3s;
+        }
+        .btn-resena:hover {
+            background: linear-gradient(90deg, #ffcc33, #ffb347);
+            color: #fff;
+        }
     </style>
 </head>
 <header>
@@ -82,9 +116,9 @@
         <div class="form-container">
             <h2>Agregar Reseña</h2>
             <form method="POST" action="">
-                <input type="text" name="nombre_restaurante" required placeholder="Nombre del Restaurante" style="width: 100%; margin-bottom: 10px;">
-                <textarea name="descripcion" required placeholder="Escribe tu reseña aquí..." rows="4" style="width: 100%;"></textarea>
-                <select name="estrellas" required>
+                <input class="input-resena" type="text" name="nombre_restaurante" required placeholder="Nombre del Restaurante">
+                <textarea class="input-resena" name="descripcion" required placeholder="Escribe tu reseña aquí..." rows="4"></textarea>
+                <select class="input-resena" name="estrellas" required>
                     <option value="">Selecciona estrellas</option>
                     <option value="1">★</option>
                     <option value="2">★★</option>
@@ -92,7 +126,7 @@
                     <option value="4">★★★★</option>
                     <option value="5">★★★★★</option>
                 </select>
-                <button type="submit">Enviar Reseña</button>
+                <button class="btn-resena" type="submit">Enviar Reseña</button>
             </form>
         </div>
         

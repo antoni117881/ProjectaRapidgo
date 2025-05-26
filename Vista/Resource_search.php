@@ -60,21 +60,22 @@
         }
 
         .search-bar-container {
-            width: 100vw;
-            max-width: 100vw;
-            margin: 0;
-            padding: 30px 0 20px 0;
+            margin: 40px auto 20px auto;
+            padding: 0;
+            display: flex;
+            justify-content: center;
         }
 
         .search-bar {
+            width: 950px;
             display: flex;
             align-items: center;
-            background: linear-gradient(145deg,rgb(255, 183, 0),rgb(228, 68, 4));
+            background: rgb(237, 203, 116);
             border-radius: 40px;
             padding: 0 20px;
             height: 60px;
-            box-shadow: 0 2px 8px rgba(216, 168, 77, 0.73);
             margin-bottom: 20px;
+            box-sizing: border-box;
         }
 
         .search-bar input {
@@ -95,6 +96,44 @@
 
         .btn-buscar {
             display: none; /* Oculta el botón si solo quieres la barra tipo buscador */
+        }
+
+        .input-resena {
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 30px;
+            background: #f7e7b5;
+            font-size: 1.2em;
+            color: #333;
+            box-shadow: 0 2px 8px rgba(216, 168, 77, 0.15);
+            outline: none;
+            transition: box-shadow 0.2s;
+        }
+
+        .input-resena:focus {
+            box-shadow: 0 4px 16px rgba(216, 168, 77, 0.25);
+            background: #fffbe6;
+        }
+
+        .btn-resena {
+            width: 100%;
+            padding: 15px 0;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #ffb347, #ffcc33);
+            color: #a94400;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(216, 168, 77, 0.15);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .btn-resena:hover {
+            background: linear-gradient(90deg, #ffcc33, #ffb347);
+            color: #fff;
         }
     </style>
 </head>
