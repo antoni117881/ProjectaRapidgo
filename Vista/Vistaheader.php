@@ -14,7 +14,7 @@
     align-items: center;
     padding: 0 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 25;
+    font-size: 25px;
 
 }
 
@@ -139,19 +139,17 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="navbar-brand" href="index.php">RAPIDGO</a>
+                    <a class="navbar-brand" href="?action=">RAPIDGO</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="?action=Restaurantes">Restaurantes</a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="?action=Menus">Menus</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="?action=Resenas">Nuestras Reseñas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="?action=Ofertas">Ofertas</a> -->
+                    <a class="nav-link" href="?action=Cesta">Cesta</a>
                 </li>
-                <button onclick="location.href='Vista/ResenaView.php'" class="btn-resena">NuestrasReseñas</button>
-                <button onclick="location.href='?action=Cesta'" class="btn-cesta">Cesta</button>
             </ul>
             <div class="usu">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">

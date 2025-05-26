@@ -1,4 +1,5 @@
 <?php
+require_once 'C:/xampp/htdocs/ProjectaRapidgo/Modelo/usuario.php';
 require_once 'BDDCconexion.php';
 
 function getConexion() {
@@ -62,7 +63,17 @@ function registerUser($nombre, $email, $password) {
         // Manejo del error
         return false;
     }
-} 
+}
+
+function getUserByEmail($email) {
+    $conexion = getConexion();
+    $query = "SELECT nombre, email, telefono, direccion FROM users WHERE email = ?";
+    $stmt = $conexion->prepare($query);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc(); // Devuelve los datos del usuario
+}
 
 session_start();
 if (isset($_SESSION['user'])) {

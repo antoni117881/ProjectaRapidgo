@@ -24,16 +24,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        .header a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            background-color: #4CAF50;
-        }
-        .header a:hover {
-            background-color: #45a049;
-        }
+       
         .container {
             width: 80%;
             margin: 0 auto;
@@ -65,13 +56,11 @@
         }
     </style>
 </head>
+<header>
+<?php include 'Vista/Vistaheader.php'?>
+</header>
 <body>
-    <div class="header">
-        <div class="header-content">
-            <h1>Reseñas de Usuarios</h1>
-            <a href="../index.php">Volver a Inicio</a>
-        </div>
-    </div>
+   
     <div class="container">
         <h1>Reseñas de Usuarios</h1>
 

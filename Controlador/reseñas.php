@@ -20,7 +20,10 @@ if (isset($_POST['idRestaurante'])) {
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (
+    $_SERVER['REQUEST_METHOD'] === 'POST' &&
+    isset($_POST['nombre_restaurante'], $_POST['descripcion'], $_POST['estrellas'])
+) {
     $nombreRestaurante = $_POST['nombre_restaurante'];
     $descripcion = $_POST['descripcion'];
     $estrellas = $_POST['estrellas'];

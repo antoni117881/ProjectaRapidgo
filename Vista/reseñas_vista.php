@@ -12,29 +12,7 @@
             margin: 0;
             padding: 0;
         }
-        .header {
-            background-color: #333;
-            color: white;
-            padding: 15px 0;
-            margin-bottom: 20px;
-        }
-        .header-content {
-            width: 80%;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .header a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            background-color: #4CAF50;
-        }
-        .header a:hover {
-            background-color: #45a049;
-        }
+       
         .container {
             width: 80%;
             margin: 0 auto;
@@ -64,18 +42,43 @@
             margin-bottom: 20px;
             padding: 15px;
         }
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .review-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 20px;
+            margin-bottom: 10px;
+        }
+        .review-desc {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .review-stars {
+            color: #f39c12;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+        }
+        .review-date {
+            color: #888;
+            font-size: 0.95em;
+        }
     </style>
 </head>
+<header>
+<?php include 'Vista/Vistaheader.php'?>
+</header>
 <body>
-    <div class="header">
-        <div class="header-content">
-            <h1>Reseñas de Usuarios</h1>
-            <a href="../index.php">Volver a Inicio</a>
-        </div>
-    </div>
+   
     <div class="container">
-        <h1>Reseñas de Usuarios</h1>
-
+        <div class="reseñas-header">
+            <h1>Reseñas del restaurante</h1>
+        </div>
+        <br>
         <div class="form-container">
             <h2>Agregar Reseña</h2>
             <form method="POST" action="">
@@ -93,15 +96,26 @@
             </form>
         </div>
         
-        <ul>
+        <div class="reviews-list">
             <?php foreach ($reseñas as $reseña): ?>
-                <li>
-                    <strong><?php echo htmlspecialchars($reseña['descripcion']); ?></strong>: 
-                    <?php echo htmlspecialchars($reseña['estrellas']); ?> 
-                    <em>(<?php echo htmlspecialchars($reseña['fecha']); ?>)</em>
-                </li>
+                <div class="review-card">
+                    <div class="review-desc">
+                        <?php echo htmlspecialchars($reseña['descripcion']); ?>
+                    </div>
+                    <div class="review-stars">
+                        <?php
+                            $numEstrellas = intval($reseña['estrellas']);
+                            for ($i = 0; $i < $numEstrellas; $i++) {
+                                echo '★';
+                            }
+                        ?>
+                    </div>
+                    <div class="review-date">
+                        Fecha: <?php echo htmlspecialchars($reseña['fecha']); ?>
+                    </div>
+                </div>
             <?php endforeach; ?>
-        </ul>
+        </div>
     </div>
 <?php else: ?>
     <p>No hay reseñas disponibles para este restaurante.</p>
