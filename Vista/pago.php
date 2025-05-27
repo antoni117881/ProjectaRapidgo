@@ -68,7 +68,6 @@ session_start();
     </style>
 </head>
 <body>
-    <?php include 'Vistaheader.php'; ?>
 
     <?php
     $total = 0;
