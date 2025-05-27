@@ -38,54 +38,68 @@
             font-family: 'Segoe UI', Arial, sans-serif;
         }
         .search-container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 40px auto;
-            padding: 32px 28px 24px 28px;
+            padding: 40px;
             background: #fffbe6;
-            border-radius: 18px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            border-radius: 24px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
         }
         .search-box {
             display: flex;
             gap: 0;
             margin-bottom: 24px;
             background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             overflow: hidden;
-            min-height: 64px;
+            min-height: 80px;
             width: 100%;
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto 24px auto;
+            transition: all 0.3s ease;
+        }
+        .search-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.12);
         }
         .search-box input {
             flex: 1;
-            padding: 22px 24px 22px 54px;
+            padding: 25px 30px 25px 70px;
             border: none;
-            font-size: 22px;
+            font-size: 24px;
             outline: none;
-            background: transparent url('https://cdn-icons-png.flaticon.com/512/622/622669.png') no-repeat 12px center/28px 28px;
-            background-size: 28px 28px;
+            background: transparent url('https://cdn-icons-png.flaticon.com/512/622/622669.png') no-repeat 20px center/32px 32px;
+            background-size: 32px 32px;
             min-width: 0;
             width: 100%;
+            color: #333;
+            font-weight: 500;
+        }
+        .search-box input::placeholder {
+            color: #999;
+            font-weight: 400;
         }
         .search-box button {
-            padding: 0 44px;
+            padding: 0 50px;
             background: linear-gradient(90deg, #ff9800 0%, #ff5722 100%);
             color: #fff;
             border: none;
-            font-size: 22px;
-            font-weight: 500;
+            font-size: 24px;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-            border-radius: 0 8px 8px 0;
-            height: 64px;
+            transition: all 0.3s ease;
+            border-radius: 0 16px 16px 0;
+            height: 80px;
             display: flex;
             align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .search-box button:hover {
             background: linear-gradient(90deg, #ffb347 0%, #ff7043 100%);
-            transform: scale(1.05);
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(255, 152, 0, 0.3);
         }
         .filter-options {
             display: flex;

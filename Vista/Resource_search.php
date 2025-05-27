@@ -8,23 +8,65 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <style>
         .search-container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
+            max-width: 1600px;
+            margin: 40px auto;
+            padding: 40px;
+            background: #fffbe6;
+            border-radius: 24px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
         }
 
         .search-box {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 0;
+            margin-bottom: 24px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+            min-height: 70px;
+            width: 100%;
+            max-width: 1700px;
+            margin: 0 auto 24px auto;
+            transition: all 0.3s ease;
         }
 
         .search-box input {
             flex: 1;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
+            padding: 28px 28px 20px 100px;
+            border: none;
+            font-size: 20px;
+            outline: none;
+            background: transparent url('https://cdn-icons-png.flaticon.com/512/622/622669.png') no-repeat 15px center/30px 30px;
+            background-size: 30px 30px;
+            min-width: 0;
+            width: 100%;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .search-box button {
+            padding: 0 36px;
+            background: linear-gradient(90deg, #ff9800 0%, #ff5722 100%);
+            color: #fff;
+            border: none;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 0 16px 16px 0;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.3);
+        }
+
+        .search-box button:hover {
+            background: linear-gradient(90deg, #ff5722 0%, #ff9800 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 87, 34, 0.4);
         }
 
         .btn-buscar {
@@ -69,10 +111,6 @@
                 <button type="submit" class="btn-buscar">Buscar</button>
             </div>
             
-            <div class="filter-options">
-                <label><input type="checkbox" name="filter[]" value="productos" checked> Productos</label>
-            </div>
-        </form>
 
         <div id="searchResults" class="search-results">
             <!-- Los resultados se mostrarán aquí -->
