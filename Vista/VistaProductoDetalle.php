@@ -267,11 +267,13 @@ if (isset($_POST['add_to_cart'])) {
                         <p class="precio">Precio: $<?php echo number_format($producto['PrecioUnidad'], 2); ?></p>
                         
                         <!-- Botón Añadir al Carrito -->
-                        <form id="add-to-cart-form" method="POST" action="/PROJECTARAPIDGO/Vista/VistaCarrito.php">
+                        <form id="add-to-cart-form" method="POST" action="/PROJECTARAPIDGO/Controlador/ControladorCarrito.php">
+                            <input type="hidden" name="add_to_cart" value="1">
                             <input type="hidden" name="producto_id" value="<?php echo $producto['ID']; ?>">
                             <input type="hidden" name="producto_nombre" value="<?php echo $producto['Nombre']; ?>">
                             <input type="hidden" name="producto_precio" id="producto_precio" value="<?php echo $producto['PrecioUnidad']; ?>">
                             <input type="hidden" name="producto_imagen" value="<?php echo $producto['Imagen']; ?>">
+                            <input type="hidden" id="usuario_id" value="<?php echo $_SESSION['usuario_id']; ?>">
 
                             <div class="cantidad-control">
                                 <button type="button" id="decrementar" class="btn-circular">−</button>
@@ -308,8 +310,10 @@ if (isset($_POST['add_to_cart'])) {
         const cantidadSpan = document.getElementById('cantidad');
         const cantidadInput = document.getElementById('cantidad_input');
         const btnAddCart = document.getElementById('btn-add-cart');
+        const formAddToCart = document.getElementById('add-to-cart-form');
         const precioUnitario = <?php echo $producto['PrecioUnidad']; ?>;
         const nombreProducto = "<?php echo addslashes($producto['Nombre']); ?>";
+        const usuarioId = document.getElementById('usuario_id').value;
 
         let cantidad = 1;
 
@@ -334,60 +338,32 @@ if (isset($_POST['add_to_cart'])) {
             }
         };
 
-        // Llama una vez al cargar la página
-        actualizarBoton();
-
-        function cambiarCantidad(delta) {
-            var input = document.getElementById('cantidad');
-            var valor = parseInt(input.value);
-            var min = parseInt(input.min);
-            var max = parseInt(input.max);
-            valor += delta;
-            if (valor < min) valor = min;
-            if (valor > max) valor = max;
-            input.value = valor;
-        }
-
-        function agregarAlCarrito() {
-            // Obtén los datos del producto desde los inputs ocultos
-            var nombre = document.querySelector('input[name="nombre"]').value;
-            var precio = document.querySelector('input[name="precio"]').value;
-            var imagen = document.querySelector('input[name="imagen"]').value;
-
-            // Envía los datos por AJAX
+        formAddToCart.onsubmit = function(e) {
+            e.preventDefault();
+            
             fetch('/PROJECTARAPIDGO/Controlador/ControladorCarrito.php', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams({
-                    'agregar': 1,
-                    'nombre': nombre,
-                    'precio': precio,
-                    'imagen': imagen
-                })
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(new FormData(this))
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    mostrarModalCarrito();
+                    window.location.href = '/PROJECTARAPIDGO/Vista/VistaCarrito.php';
                 } else {
-                    alert('Error al agregar el producto');
+                    alert('Error al agregar el producto al carrito');
                 }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al agregar el producto al carrito');
             });
-        }
+        };
 
-        function mostrarModalCarrito() {
-            // Carga el contenido del carrito por AJAX
-            fetch('/PROJECTARAPIDGO/Vista/VistaCarrito.php')
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('contenidoCarrito').innerHTML = html;
-                    document.getElementById('modalCarrito').style.display = 'flex';
-                });
-        }
-
-        function cerrarModalCarrito() {
-            document.getElementById('modalCarrito').style.display = 'none';
-        }
+        // Llama una vez al cargar la página
+        actualizarBoton();
     </script>
     <?php include 'footer.php'; ?>
 </body>

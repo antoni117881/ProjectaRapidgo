@@ -1,9 +1,13 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagar</title>
+    <link rel="stylesheet" href="../style.css">
     <style>
         .pago-form {
             max-width: 400px;
@@ -45,16 +49,45 @@
         .hidden {
             display: none;
         }
+        .resumen-carrito {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .resumen-carrito h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .resumen-carrito p {
+            margin: 5px 0;
+            color: #666;
+        }
     </style>
 </head>
 <body>
+    <?php include 'Vistaheader.php'; ?>
 
-    <form method="POST" action="/ProjectaRapidgo/Controlador/PagoController.php" class="pago-form">
+    <?php
+    $total = 0;
+    if (!empty($_SESSION['carrito'])) {
+        foreach ($_SESSION['carrito'] as $producto) {
+            $total += $producto['precio'] * $producto['cantidad'];
+        }
+    }
+    ?>
 
+    <div class="resumen-carrito">
+        <h3>Resumen del Carrito</h3>
+        <p>Total a pagar: $<?php echo number_format($total, 2); ?></p>
+    </div>
+
+    <form method="POST" action="/PROJECTARAPIDGO/Controlador/PagoController.php" class="pago-form">
         <h2>Formulario de Pago</h2>
         
-        <label for="monto">Monto a pagar:</label>
-        <input type="number" name="monto" id="monto" required>
+        <input type="hidden" name="monto" value="<?php echo $total; ?>">
         
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" id="nombre" required>
@@ -63,10 +96,10 @@
         <input type="email" name="correo" id="correo" required>
         
         <label for="direccion">Dirección:</label>
-        <input type="text" name="direccion">
+        <input type="text" name="direccion" required>
         
         <label for="metodo">Método de Pago:</label>
-        <select name="metodo" id="metodo" onchange="mostrarDatosPago()">
+        <select name="metodo" id="metodo" onchange="mostrarDatosPago()" required>
             <option value="">Seleccione un método</option>
             <option value="tarjeta">Tarjeta de Crédito/Débito</option>
             <option value="paypal">PayPal</option>
@@ -75,36 +108,38 @@
         
         <div id="datosPagoDiv" class="hidden">
             <label for="numero">Número de Tarjeta:</label>
-            <input type="text" name="numero" id="numero">
+            <input type="text" name="numero" id="numero" pattern="[0-9]{16}" maxlength="16" placeholder="1234 5678 9012 3456">
             
             <label for="vencimiento">Fecha de Vencimiento:</label>
-            <input type="text" name="vencimiento" id="vencimiento" placeholder="MM/AA">
+            <input type="text" name="vencimiento" id="vencimiento" placeholder="MM/AA" pattern="(0[1-9]|1[0-2])\/([0-9]{2})" maxlength="5">
             
             <label for="cvv">CVV:</label>
-            <input type="text" name="cvv" id="cvv">
+            <input type="text" name="cvv" id="cvv" pattern="[0-9]{3}" maxlength="3" placeholder="123">
         </div>
 
-        <button type="submit">Pagar</button>
+        <button type="submit">Pagar $<?php echo number_format($total, 2); ?></button>
     </form>
 
     <script>
         function mostrarDatosPago() {
             const metodo = document.getElementById("metodo").value;
             const datosPagoDiv = document.getElementById("datosPagoDiv");
+            const inputsTarjeta = datosPagoDiv.getElementsByTagName("input");
             
             if (metodo === "tarjeta") {
                 datosPagoDiv.classList.remove("hidden");
+                for (let input of inputsTarjeta) {
+                    input.required = true;
+                }
             } else {
                 datosPagoDiv.classList.add("hidden");
+                for (let input of inputsTarjeta) {
+                    input.required = false;
+                }
             }
         }
-            
-        document.querySelector('.pago-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Previene el envío para verificar datos
-        console.log("Formulario enviado con datos:", new FormData(this));
-        this.submit(); // Descomenta si quieres permitir el envío después de verificar
-    });
- </script>
+    </script>
 
+    <?php include 'vistafooter.php'; ?>
 </body>
 </html>

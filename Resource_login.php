@@ -171,8 +171,8 @@
                 <input type="submit" value="Iniciar Sesión" class="boton-logear">
 
                 <div class="form-links">
-                    <a href="?action=NewPassword">¿Olvidaste tu contraseña?</a>
-                    <a href="?action=Registro">Crear Cuenta</a>
+                    <a href="?action=newpassword">¿Olvidaste tu contraseña?</a>
+                    <a href="?action=registro">Crear Cuenta</a>
                 </div>
                 <div class="form-group">
                 <label>

@@ -12,6 +12,9 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
     case 'registro':
         include __DIR__.'/Resource_registro.php';
          break;
+    case'newpassword':
+        include __DIR__.'/Vista/VistaNewPassword.php';
+        break;
     case 'Ofertas':
         include __DIR__.'./Vista/Ofertas.php';
         break;
@@ -34,19 +37,21 @@ switch ($action) { //aqui solo apuntamos a controladores y resource no a modulos
         include __DIR__.'/RegistroProductoIndividual.php';
         break;
     case 'agregarCesta':
-        include __DIR__.'/Registrocesta.php';
+        include __DIR__.'/Vista/VistaCarrito.php';
         break;
     case 'Pagar':
         include __DIR__.'/Vista/pago.php';
         break;
     case 'Cesta':
-        include __DIR__.'Vista/Vistacesta.php';
+        include __DIR__.'/Vista/VistaCarrito.php';
     case 'cerrarsesion':
         include __DIR__.'/Controlador/cerrarSesion.php';
         break;
-
+    case'datosusuario':
+        include __DIR__.'/Vista/DatosUsuario.php';
+        break;
     case 'Restaurantes':
-        include __DIR__.'./Vista/VistaRestaurantessolo.php';
+        include __DIR__.'/Vista/VistaRestaurantessolo.php';
         break; 
         case 'login3':
             include __DIR__.'/loginvosta.php';

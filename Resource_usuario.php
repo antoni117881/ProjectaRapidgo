@@ -66,6 +66,8 @@ if (!isset($_SESSION['pedidos'])) {
     <meta charset="UTF-8">
     <title>Perfil de Usuario</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
     body {
         background: #ffc247;
@@ -301,6 +303,8 @@ if (!isset($_SESSION['pedidos'])) {
     </style>
 </head>
 <body>
+    <?php include 'Vista/Vistaheader.php'; ?>
+
     <div class="profile-container">
         <?php
         // Título y breadcrumb dinámico
@@ -349,11 +353,8 @@ if (!isset($_SESSION['pedidos'])) {
         </div>
 
         <ul class="profile-menu">
-            <li><a href="?action=DatosUsuario"><span>👤</span> Datos de Usuario</a></li>
+            <li><a href="?action=datosusuario"><span>👤</span> Datos de Usuario</a></li>
             <li><a href="?action=UltimosPedidos"><span>🛒</span> Últimos Pedidos</a></li>
-            <li><a href="?action=ComparteYGana"><span>🗑️</span> Comparte y gana</a></li>
-            <li><a href="?action=Codigos"><span>🏷️</span> Códigos promocionales</a></li>
-            <li><a href="?action=Idioma"><span>🌐</span> Idioma</a></li>
             <li><a href="?action=FAQ"><span>❓</span> Preguntas frecuentes</a></li>
             <li><a href="?action=cerrarsesion"><span>🔓</span> Cerrar sesión</a></li>
         </ul>
@@ -583,6 +584,8 @@ if (!isset($_SESSION['pedidos'])) {
         ?>
         </div>
     </div>
+
+    <?php include 'Vista/vistafooter.php'; ?>
 
     <script>
     function toggleAccordion(index) {

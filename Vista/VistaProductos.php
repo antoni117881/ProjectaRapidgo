@@ -190,8 +190,12 @@ require_once 'Controlador/productos_controller.php';
                             </button>
                         </form>
 
-                        <form action="?action=agregarCesta" method="POST">
-                            <input type="hidden" name="idProducto" value="<?php echo $producto['ID']; ?>">
+                        <form action="/PROJECTARAPIDGO/Vista/VistaCarrito.php" method="POST">
+                            <input type="hidden" name="add_to_cart" value="1">
+                            <input type="hidden" name="producto_id" value="<?php echo $producto['ID']; ?>">
+                            <input type="hidden" name="producto_nombre" value="<?php echo $producto['Nombre']; ?>">
+                            <input type="hidden" name="producto_precio" value="<?php echo $producto['PrecioUnidad']; ?>">
+                            <input type="hidden" name="producto_imagen" value="<?php echo $producto['Imagen']; ?>">
                             <input type="number" 
                                    name="cantidad" 
                                    value="1" 
@@ -199,7 +203,7 @@ require_once 'Controlador/productos_controller.php';
                                    max="10" 
                                    class="cantidad-input">
                             <button type="submit" class="btn btn-success">
-                                Añadir a la cesta
+                                Añadir a la cesta 
                             </button>
                         </form>
                     </div>
